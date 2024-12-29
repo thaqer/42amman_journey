@@ -5,7 +5,7 @@ NAME = pipex
 
 SRCS = pipex.c end_process.c child_process.c
 
-LIBFT = /home/thaer/Desktop/core/pipex/ft_libft/libft.a
+LIBFT = ../pipex/ft_libft/libft.a
 
 OBJS = $(SRCS:.c=.o)
 

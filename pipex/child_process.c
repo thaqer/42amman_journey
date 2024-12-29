@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:44:17 by tbaniatt          #+#    #+#             */
-/*   Updated: 2024/12/04 15:44:19 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2024/12/04 21:28:05 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	create_child1(t_cmd *cmd, char **argv, char **env)
 {
 	cmd->pid1 = fork();
 	if (cmd->pid1 < 0)
-		error_message("Fork failed", cmd);
+		error_message("Fork failed\n", cmd);
 	if (cmd->pid1 == 0)
 		child1(cmd, argv, env);
 }
@@ -26,7 +26,7 @@ void	create_child2(t_cmd *cmd, char **argv, char **env)
 {
 	cmd->pid2 = fork();
 	if (cmd->pid2 == -1)
-		error_message("Fork failed", cmd);
+		error_message("Fork failed\n", cmd);
 	if (cmd->pid2 == 0)
 		child2(cmd, argv, env);
 }
@@ -40,13 +40,13 @@ void	child1(t_cmd *cmd, char **argv, char **env)
 	if (!cmd->args)
 	{
 		child_free(cmd);
-		error_message("Error: Command arguments allocation failed", cmd);
+		error_message("Error: Command arguments allocation failed\n", cmd);
 	}
 	cmd->cmd = get_command(cmd->cmd_path, cmd->args[0]);
 	if (cmd->cmd == NULL)
 	{
 		child_free(cmd);
-		error_message("Error: Command not found", cmd);
+		error_message("Error: Command_1 not found\n", cmd);
 	}
 	if (execve(cmd->cmd, cmd->args, env) == -1)
 	{
@@ -65,18 +65,18 @@ void	child2(t_cmd *cmd, char **argv, char **env)
 	if (!cmd->args)
 	{
 		child_free(cmd);
-		error_message("Error: Command arguments allocation failed", cmd);
+		error_message("Error: Command arguments allocation failed\n", cmd);
 	}
 	cmd->cmd = get_command(cmd->cmd_path, cmd->args[0]);
 	if (cmd->cmd == NULL)
 	{
 		child_free(cmd);
-		error_message("Error: Command not found", cmd);
+		error_message("Error: Command_2 not found\n", cmd);
 	}
 	if (execve(cmd->cmd, cmd->args, env) == -1)
 	{
 		child_free(cmd);
-		perror("execve failed");
+		write(2, "execve failed\n", 14);
 		exit(1);
 	}
 }

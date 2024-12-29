@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:46:36 by tbaniatt          #+#    #+#             */
-/*   Updated: 2024/12/04 16:27:43 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2024/12/04 21:28:42 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	error_message(char *message, t_cmd *cmd)
 {
 	close_command(cmd);
-	perror(message);
+	write(2, message, ft_strlen(message));
 	exit(1);
 }
 
@@ -40,8 +40,6 @@ void	child_free(t_cmd *cmd)
 			free(cmd->cmd_path[i++]);
 		free(cmd->cmd_path);
 	}
-	if (cmd->paths)
-		free(cmd->paths);
 }
 
 void	parent_free(t_cmd *cmd)
@@ -63,24 +61,18 @@ void	parent_free(t_cmd *cmd)
 	}
 }
 
-void close_command(t_cmd *cmd)
+void	close_command(t_cmd *cmd)
 {
-    if (cmd == NULL)
-        return;
-
-    if (cmd->fd1 >= 0) // Only close if fd1 is initialized
-    {
-        close(cmd->fd1);
-        cmd->fd1 = -1; // Mark as closed
-    }
-
-    if (cmd->fd2 >= 0) // Only close if fd2 is initialized
-    {
-        close(cmd->fd2);
-        cmd->fd2 = -1; // Mark as closed
-    }
-
-    // Any other descriptors should be checked similarly
+	if (cmd == NULL)
+		return ;
+	if (cmd->fd1 >= 0)
+		close(cmd->fd1);
+	if (cmd->fd2 >= 0)
+		close(cmd->fd2);
+	if (cmd->tube[0] >= 0)
+		close(cmd->tube[0]);
+	if (cmd->tube[1] >= 0)
+		close(cmd->tube[1]);
 }
 
 void	error_process(char *massage, t_cmd *cmd)

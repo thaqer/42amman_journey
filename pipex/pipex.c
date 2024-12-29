@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 10:42:26 by tbaniatt          #+#    #+#             */
-/*   Updated: 2024/12/04 16:33:58 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:58:47 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ void	open_files(t_cmd *cmd, char **argv)
 {
 	cmd->fd1 = open(argv[1], O_RDONLY);
 	if (cmd->fd1 == -1)
-		error_message("input file error", cmd);
-	cmd->fd2 = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		perror("Error");
+	cmd->fd2 = open(argv[create_child14], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (cmd->fd2 == -1)
-	{
-		close(cmd->fd1);
-		error_message("output file error", cmd);
-	}
+		perror("Error");
 }
 
 char	*get_path(char **env, t_cmd *cmd)
@@ -37,7 +34,7 @@ char	*get_path(char **env, t_cmd *cmd)
 			return (env[i] + 5);
 		i++;
 	}
-	error_message("Error: PATH not found in environment variables", cmd);
+	error_message("Error: PATH not found in environment variables\n", cmd);
 	return (NULL);
 }
 
@@ -68,24 +65,25 @@ int	main(int argc, char **argv, char **env)
 	t_cmd	cmd;
 	int		p;
 
+	cmd = (t_cmd){0};
 	if (argc != 5)
-		error_message("Error: Wrong number of arguments", &cmd);
+		error_message("Error: Wrong number of arguments\n", &cmd);
 	open_files(&cmd, argv);
 	p = pipe(cmd.tube);
 	if (p == -1)
 		error_process("Error: Pipe failed", &cmd);
 	cmd.paths = get_path(env, &cmd);
 	if (!cmd.paths)
-		error_process("Error: PATH not found in environment variables", &cmd);
+		error_process("Error: PATH not found in environment variables\n", &cmd);
 	cmd.cmd_path = ft_split(cmd.paths, ':');
 	if (!cmd.cmd_path)
-		error_process("Error: Command path allocation failed", &cmd);
+		error_process("Error: Command path allocation failed\n", &cmd);
 	if (cmd.fd1 > 0)
 		create_child1(&cmd, argv, env);
 	if (cmd.fd2 >= 0)
 		create_child2(&cmd, argv, env);
 	close_command(&cmd);
-	waitpid(cmd.pid1, NULL, 0);
-	waitpid(cmd.pid2, NULL, 0);
+	waitpid(-1, NULL, 0);
+	waitpid(-1, NULL, 0);
 	parent_free(&cmd);
 }
