@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:17:19 by tbaniatt          #+#    #+#             */
-/*   Updated: 2024/12/30 11:27:58 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2024/12/30 12:22:40 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ void    map_runder(t_photos *photos, t_map *map)
             else if (map->map[i][j] == '0')
                 mlx_put_image_to_window(map->mlx, map->win, photos->floor, j * 64, i * 64);
             else if (map->map[i][j] == 'P')
-	    {
-		mlx_put_image_to_window(map->mlx, map->win, photos->floor, j * 64, i * 64);
 		mlx_put_image_to_window(map->mlx, map->win, photos->player, j * 64, i * 64);
-	    }
             else if (map->map[i][j] == 'C')
                 mlx_put_image_to_window(map->mlx, map->win, photos->collectable, j * 64, i * 64);
             else if (map->map[i][j] == 'E')
