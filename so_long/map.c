@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:52:04 by tbaniatt          #+#    #+#             */
-/*   Updated: 2024/12/29 17:06:23 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2024/12/29 18:56:16 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,22 +167,3 @@ void	is_rect(char **map)
 	}
 }
 
-int	main(int argc, char **argv)
-{
-	t_map	map;
-
-	if (argc != 2)
-		write(1, "Error\n", 6);
-	dimensions(argv[1], &map);
-	read_map(argv[1], &map);
-	wall_check(&map);
-	required_elements(&map);
-	is_rect(map.map);
-	ft_printf("rows: %d\n", map.rows);
-	ft_printf("columns: %d\n", map.columns);
-	ft_printf("player: %d\n", map.player);
-	ft_printf("exit: %d\n", map.exit);
-	ft_printf("collectable: %d\n", map.collectable);
-	print_map(&map);
-	return (0);
-}

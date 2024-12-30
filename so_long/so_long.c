@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:17:19 by tbaniatt          #+#    #+#             */
-/*   Updated: 2024/12/28 00:18:21 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2024/12/30 09:45:12 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,38 @@ int	handle_keypress(int keycode, void *param)
         exit(0);
     return (0);
 }
-
-int	main(void)
+void open_window(t_map *map)
 {
-    void	*mlx;
-    void	*mlx_win;
+    t_photos    photos;
+    int         wid;
+    int         h;
 
-    mlx = mlx_init();
-    mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-    mlx_hook(mlx_win, 17, 0, close_window, NULL);        // Handle window close event
-    mlx_hook(mlx_win, 2, 1L << 0, handle_keypress, NULL); // Handle keypress events
-    mlx_loop(mlx);
+    map->mlx = mlx_init();
+    map->win = mlx_new_window(map->mlx, map->columns * 64, map->rows * 64, "so_long");
+    if (!map->win)
+    {
+        write(1, "Error creating window\n", 23);
+        exit(1);
+    }
+    mlx_hook(map->win, 17, 1L << 17, close_window, map);
+    mlx_hook(map->win, 2, 1L << 0, handle_keypress, map);
+    mlx_hook(map->win, 17, 1L << 17, close_window, map);
+    mlx_loop(map->mlx);
+}
+
+
+int main(int argc, char **argv)
+{
+    t_map    map;
+
+    if (argc != 2)
+    {
+        write(1, "Error: Invalid number of arguments\n", 36);
+        return (1);
+    }
+    dimensions(argv[1], &map);
+    read_map(argv[1], &map);
+    wall_check(&map);
+    required_elements(&map);
+    open_window(&map);
 }

@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:15:06 by tbaniatt          #+#    #+#             */
-/*   Updated: 2024/12/29 17:05:50 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2024/12/29 20:18:29 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # define COLLECTABLE "../so_long/photos/collectable.xpm"
 # define EXIT "../so_long/photos/exit.xpm"
 
-# include "../get_next_line/get_next_line.h"
-# include "../libft/libft.h"
-# include "../printf/ft_printf.h"
+# include "../so_long/get_next_line/get_next_line.h"
+# include "../so_long/libft/libft.h"
+# include "../so_long/printf/ft_printf.h"
 # include <fcntl.h>
 # include <mlx.h>
 # include <stdio.h>
@@ -41,11 +41,14 @@ typedef struct s_photos
 typedef struct s_map
 {
 	char	**map;
+	void	*mlx;
+	void	*win;
 	int		rows;
 	int		columns;
 	int		player;
 	int		exit;
 	int		collectable;
+	t_photos	photos;
 }			t_map;
 
 void		dimensions(char *map_name, t_map *map);
@@ -54,5 +57,9 @@ void		wall_check(t_map *map);
 void		required_elements(t_map *map);
 void		required_error(t_map *map);
 void		is_rect(char **map);
+void		open_window(t_map *map);
+int			close_window(void *param);
+int			handle_keypress(int keycode, void *param);
+
 
 #endif
