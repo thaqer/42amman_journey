@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:17:19 by tbaniatt          #+#    #+#             */
-/*   Updated: 2024/12/30 09:45:12 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2024/12/30 10:27:57 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,5 @@ int main(int argc, char **argv)
     wall_check(&map);
     required_elements(&map);
     open_window(&map);
+    
 }
