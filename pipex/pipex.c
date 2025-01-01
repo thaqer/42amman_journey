@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 10:42:26 by tbaniatt          #+#    #+#             */
-/*   Updated: 2024/12/18 17:58:47 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/01 21:25:11 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	open_files(t_cmd *cmd, char **argv)
 	cmd->fd1 = open(argv[1], O_RDONLY);
 	if (cmd->fd1 == -1)
 		perror("Error");
-	cmd->fd2 = open(argv[create_child14], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	cmd->fd2 = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (cmd->fd2 == -1)
 		perror("Error");
 }
