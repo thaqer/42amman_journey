@@ -63,7 +63,7 @@ typedef struct s_map
 	int			collectable;
 	int			player_x;
 	int			player_y;
-	t_photos	photos;
+	t_photos	*photos;
 }	t_map;
 
 typedef struct s_index

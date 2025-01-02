@@ -28,24 +28,21 @@ int	handle_keypress(int keycode, void *param)
 	return (0);
 }
 
-void	init_photos(t_photos *photos, t_map *map)
+void init_photos(t_photos *photos, t_map *map)
 {
-	int	wid;
-	int	h;
+    int wid = WIDTH;
+    int h = HEIGHT;
 
-	wid = WIDTH;
-	h = WIDTH;
-	photos->wall = mlx_xpm_file_to_image(map->mlx, WALL, &wid, &h);
-	photos->floor = mlx_xpm_file_to_image(map->mlx, FLOOR, &wid, &h);
-	photos->player = mlx_xpm_file_to_image(map->mlx, PLAYER, &wid, &h);
-	photos->collectable = mlx_xpm_file_to_image(map->mlx, COLLECTABLE,
-			&wid, &h);
-	photos->exit = mlx_xpm_file_to_image(map->mlx, EXIT, &wid, &h);
+    photos->wall = mlx_xpm_file_to_image(map->mlx, WALL, &wid, &h);
+    photos->floor = mlx_xpm_file_to_image(map->mlx, FLOOR, &wid, &h);
+    photos->player = mlx_xpm_file_to_image(map->mlx, PLAYER, &wid, &h);
+    photos->collectable = mlx_xpm_file_to_image(map->mlx, COLLECTABLE, &wid, &h);
+    photos->exit = mlx_xpm_file_to_image(map->mlx, EXIT, &wid, &h);
 }
+
 
 void	put_image(t_photos *photos, t_map *map, int x, int y)
 {
-	photos->img = NULL;
 	if (map->map[y][x] == '1')
 		photos->img = photos->wall;
 	else if (map->map[y][x] == '0')
@@ -60,39 +57,50 @@ void	put_image(t_photos *photos, t_map *map, int x, int y)
 		mlx_put_image_to_window(map->mlx, map->win, photos->img,
 			x * WIDTH, y * HEIGHT);
 }
-
+	
 void	map_runder(t_photos *photos, t_map *map)
 {
-	t_index	index;
 
-	index.y = 0;
-	while (index.y < map->rows)
+	int y = 0;
+	int x = 0;
+	while (y < map->rows)
 	{
-		index.x = 0;
-		while (index.x < map->columns)
+		x = 0;
+		while (x < map->columns)
 		{
-			put_image(photos, map, index.x, index.y);
-			index.x++;
+			if (map->map[y][x] == 'P')
+			{
+				map->player_x = x;				
+				map->player_y = y;				
+			}
+			put_image(photos, map, x, y);
+			x++;
 		}
-		index.y++;
+		y++;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	t_map	map;
-
+	t_map	*map;
+	
 	if (argc != 2)
 	{
 		write(1, "Error: Invalid number of arguments.\n", 36);
 		exit(1);
 	}
+	map = malloc(sizeof(t_map));
+	if (map == NULL)
+	{
+   		perror("Error: Memory allocation for map failed");
+    	exit(EXIT_FAILURE);
+	}
 	map_name(argv[1]);
-	dimensions(argv[1], &map);
-	read_map(argv[1], &map);
-	is_rect(map.map);
-	wall_check(&map);
-	required_elements(&map);
-	open_window(&map);
+	dimensions(argv[1], map);
+	read_map(argv[1], map);
+	is_rect(map->map);
+	wall_check(map);
+	required_elements(map);
+	open_window(map);
 	return (0);
 }

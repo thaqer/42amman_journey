@@ -138,15 +138,3 @@ void	required_error(t_map *map)
 		exit(1);
 	}
 }
-
-// void	print_map(t_map *map)
-// {
-// 	int	y;
-
-// 	y = 0;
-// 	while (y < map->rows)
-// 	{
-// 		ft_printf("%s\n", map->map[y]);
-// 		y++;
-// 	}
-// }
