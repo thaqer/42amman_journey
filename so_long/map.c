@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:52:04 by tbaniatt          #+#    #+#             */
-/*   Updated: 2024/12/29 18:56:16 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/01 18:08:15 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ void	wall_check(t_map *map)
 		x = 0;
 		while (x < map->columns)
 		{
-			if ((y == 0 || y == map->rows - 1 || x == 0 || x == map->columns
-					- 1) && map->map[y][x] != '1')
+			if ((y == 0 || y == map->rows - 1 || x == 0
+			|| x == map->columns - 1) && map->map[y][x] != '1')
 			{
 				write(1, "Error: Map not enclosed by walls.\n", 33);
 				exit(1);
@@ -139,31 +139,14 @@ void	required_error(t_map *map)
 	}
 }
 
-void	print_map(t_map *map)
-{
-	int	y;
+// void	print_map(t_map *map)
+// {
+// 	int	y;
 
-	y = 0;
-	while (y < map->rows)
-	{
-		ft_printf("%s\n", map->map[y]);
-		y++;
-	}
-}
-
-void	is_rect(char **map)
-{
-	size_t	x;
-
-	x = 0;
-	while (map[x])
-	{
-		if (ft_strlen(map[x]) != ft_strlen(map[x + 1]))
-		{
-			write(1, "Error: Map is not rectangular.\n", 31);
-			exit(1);
-		}
-		x++;
-	}
-}
-
+// 	y = 0;
+// 	while (y < map->rows)
+// 	{
+// 		ft_printf("%s\n", map->map[y]);
+// 		y++;
+// 	}
+// }

@@ -7,7 +7,7 @@ MLX_FLAGS = -Lminilibx -lmlx -lXext -lX11 -lbsd
 NAME = so_long
 
 SRCS = map.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-       so_long.c
+       so_long.c map1.c window.c free.c
 
 LIBFT = ../so_long/libft/libft.a
 PRINTF = ../so_long/printf/libftprintf.a

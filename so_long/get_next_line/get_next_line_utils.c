@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 09:18:18 by tbaniatt          #+#    #+#             */
-/*   Updated: 2024/12/25 21:01:36 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/01 11:18:53 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,10 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	x;
 
+	if (!s)
+		return (0);
 	x = 0;
-	while (*s != '\0')
-	{
+	while (s[x])
 		x++;
-		s++;
-	}
 	return (x);
 }
