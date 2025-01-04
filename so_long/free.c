@@ -15,8 +15,12 @@
 void	exit_game(t_map *map)
 {
 	cleanup_resources(map);
-	
-	free(map);
+	exit(EXIT_FAILURE);
+}
+
+void	exit_game_error(t_map *map)
+{
+	cleanup_resources(map);
 	perror("error: ");
 	exit(EXIT_FAILURE);
 }
@@ -63,4 +67,5 @@ void	cleanup_resources(t_map *map)
 		mlx_destroy_display(map->mlx);
 		free(map->mlx);
 	}
+	free(map);
 }

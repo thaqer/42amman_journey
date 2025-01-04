@@ -77,10 +77,10 @@ void			read_map(char *map_name, t_map *map);
 void			wall_check(t_map *map);
 void			required_elements(t_map *map);
 void			required_error(t_map *map);
-void			is_rect(char **map);
-void			map_name(char *map_name);
+void			is_rect(char **map, t_map *map1);
+void			map_name(char *map_name, t_map *map);
 void			open_window(t_map *map);
-int				close_window(void *param);
+int				close_window(t_map *map);
 int				handle_keypress(int keycode, void *param);
 void			init_photos(t_photos *photos, t_map *map);
 void			put_image(t_photos *photos, t_map *map, int x, int y);
@@ -91,5 +91,6 @@ void			cleanup_resources(t_map *map);
 void			moving(t_map *map, int new_x, int new_y);
 void			update_position(t_map *map, int new_x, int new_y);
 void			exit_game(t_map *map);
+void			exit_game_error(t_map *map);
 
 #endif

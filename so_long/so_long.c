@@ -12,9 +12,9 @@
 
 #include "so_long.h"
 
-int	close_window(void *param)
+int	close_window( t_map *map)
 {
-	(void)param;
+	exit_game(map);
 	exit(0);
 }
 
@@ -22,12 +22,10 @@ int	handle_keypress(int keycode, void *param)
 {
 	t_map	*map;
 
-	(void)param;
 	if (keycode == ESC)
 	{
 		map = (t_map *)param;
 		exit_game(map);
-		close_window(param);
 	}
 	if (keycode == W || keycode == A || keycode == S || keycode == D
 		|| keycode == UP || keycode == DOWN || keycode == LEFT

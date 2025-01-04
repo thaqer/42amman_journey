@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	is_rect(char **map)
+void	is_rect(char **map, t_map *map1)
 {
 	size_t	len;
 	int		i;
@@ -22,23 +22,17 @@ void	is_rect(char **map)
 	while (map[i])
 	{
 		if (ft_strlen(map[i]) != len)
-		{
-			write(1, "Error: Map is not rectangular.\n", 31);
-			exit(1);
-		}
+			exit_game_error(map1);
 		i++;
 	}
 }
 
-void	map_name(char *map_name)
+void	map_name(char *map_name, t_map *map)
 {
 	int	len;
 
 	len = ft_strlen(map_name);
 	if (len < 5 || map_name[len - 4] != '.' || map_name[len - 3] != 'b'
 		|| map_name[len - 2] != 'e' || map_name[len - 1] != 'r')
-	{
-		write(1, "Error: Invalid map file.\n", 25);
-		exit(1);
-	}
+		exit_game_error(map);
 }

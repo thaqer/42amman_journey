@@ -27,10 +27,10 @@ int	main(int argc, char **argv)
 		perror("Error: Memory allocation for map failed");
 		exit(EXIT_FAILURE);
 	}
-	map_name(argv[1]);
+	map_name(argv[1], map);
 	dimensions(argv[1], map);
 	read_map(argv[1], map);
-	is_rect(map->map);
+	is_rect(map->map, map);
 	wall_check(map);
 	required_elements(map);
 	open_window(map);

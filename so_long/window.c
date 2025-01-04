@@ -16,13 +16,13 @@ void	open_window(t_map *map)
 {
 	t_photos	*photos;
 
-	photos = ft_calloc(1,sizeof(t_photos));
+	photos = malloc(sizeof(t_photos));
 	if (!photos)
 		exit_game(map);
 	map->mlx = mlx_init();
 	if (!map->mlx)
 	{
-		free(photos);	
+		free(photos);
 		exit_game(map);
 	}
 	map->win = mlx_new_window(map->mlx, map->columns * WIDTH, map->rows

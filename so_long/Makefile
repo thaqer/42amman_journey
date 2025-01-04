@@ -1,7 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 
-# Ensure the library paths are correct
 MLX_FLAGS = -Lminilibx -lmlx -lXext -lX11 -lbsd
 
 NAME = so_long
@@ -10,26 +9,29 @@ SRCS = map.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
        main.c so_long.c map_utilities.c window.c free.c
 
 LIBFT_DIR = ../so_long/libft
-
 LIBFT = $(LIBFT_DIR)/libft.a
 
-OBJS = $(SRCS:.c=.o)
+OBJ_DIR = obj
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
-# Default target
 all: $(NAME)
 
 # Link object files with libraries
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_FLAGS) -o $(NAME) -L $(LIBFT_DIR) -lft
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
+# Create object directory and compile source files
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(OBJ_DIR)/get_next_line
+	$(CC) $(CFLAGS) -c $< -o $@
+
 # Clean up object files
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
-	rm -f $(OBJS)
-
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean

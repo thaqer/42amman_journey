@@ -19,16 +19,10 @@ void	dimensions(char *map_name, t_map *map)
 
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
-	{
-		write(1, "open map Error\n", 16);
-		exit(1);
-	}
+		exit_game_error(map);
 	line = get_next_line(fd);
 	if (!line)
-	{
-		write(1, "Error: Empty map\n", 17);
-		exit(1);
-	}
+		exit_game_error(map);
 	map->columns = ft_strlen(line) - 1;
 	map->rows = 0;
 	while (line)
@@ -52,10 +46,7 @@ void	read_map(char *map_name, t_map *map)
 		exit_game(map);
 	map->map = malloc(sizeof(char *) * (map->rows + 1));
 	if (!map->map)
-	{
-		write(1, "Error: Memory allocation failed.\n", 33);
-		exit(1);
-	}
+		exit_game_error(map);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -80,10 +71,7 @@ void	wall_check(t_map *map)
 		{
 			if ((y == 0 || y == map->rows - 1 || x == 0 || x == map->columns
 					- 1) && map->map[y][x] != '1')
-			{
-				write(1, "Error: Map not enclosed by walls.\n", 33);
-				exit(1);
-			}
+				exit_game_error(map);
 			x++;
 		}
 		y++;
@@ -120,23 +108,11 @@ void	required_elements(t_map *map)
 void	required_error(t_map *map)
 {
 	if (map->player != 1)
-	{
-		write(1, "Error: Player not found or too many players.\n", 45);
-		exit(1);
-	}
+		exit_game_error(map);
 	if (map->exit != 1)
-	{
-		write(1, "Error: Exit not found or too many exits.\n", 41);
-		exit(1);
-	}
+		exit_game_error(map);
 	if (map->collectable <= 0)
-	{
-		write(1, "Error: No collectables found.\n", 31);
-		exit(1);
-	}
+		exit_game_error(map);
 	if (map->columns < 3 || map->rows < 3)
-	{
-		write(1, "Error: Map is too small.\n", 25);
-		exit(1);
-	}
+		exit_game_error(map);
 }
