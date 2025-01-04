@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:15:06 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/01 17:16:09 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/03 22:40:49 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@
 
 typedef struct s_photos
 {
-	void	*wall;
-	void	*floor;
-	void	*player;
-	void	*collectable;
-	void	*exit;
-	void	*img;
-}	t_photos;
+	void		*wall;
+	void		*floor;
+	void		*player;
+	void		*collectable;
+	void		*exit;
+	void		*img;
+}				t_photos;
 
 typedef struct s_map
 {
@@ -64,29 +64,32 @@ typedef struct s_map
 	int			player_x;
 	int			player_y;
 	t_photos	*photos;
-}	t_map;
+}				t_map;
 
 typedef struct s_index
 {
-	int		x;
-	int		y;
-}	t_index;
+	int			x;
+	int			y;
+}				t_index;
 
-void	dimensions(char *map_name, t_map *map);
-void	read_map(char *map_name, t_map *map);
-void	wall_check(t_map *map);
-void	required_elements(t_map *map);
-void	required_error(t_map *map);
-void	is_rect(char **map);
-void	map_name(char *map_name);
-void	open_window(t_map *map);
-int		close_window(void *param);
-int		handle_keypress(int keycode, void *param);
-void	init_photos(t_photos *photos, t_map *map);
-void	put_image(t_photos *photos, t_map *map, int x, int y);
-void	map_runder(t_photos *photos, t_map *map);
-void	key_move(int keycode, t_map *map);
-void    runder_map(t_photos *photos, t_map *map);
-
+void			dimensions(char *map_name, t_map *map);
+void			read_map(char *map_name, t_map *map);
+void			wall_check(t_map *map);
+void			required_elements(t_map *map);
+void			required_error(t_map *map);
+void			is_rect(char **map);
+void			map_name(char *map_name);
+void			open_window(t_map *map);
+int				close_window(void *param);
+int				handle_keypress(int keycode, void *param);
+void			init_photos(t_photos *photos, t_map *map);
+void			put_image(t_photos *photos, t_map *map, int x, int y);
+void			map_runder(t_photos *photos, t_map *map);
+void			key_move(int keycode, t_map *map);
+void			exit_game(t_map *map);
+void			cleanup_resources(t_map *map);
+void			moving(t_map *map, int new_x, int new_y);
+void			update_position(t_map *map, int new_x, int new_y);
+void			exit_game(t_map *map);
 
 #endif

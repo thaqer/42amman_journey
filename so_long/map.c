@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:52:04 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/01 18:08:15 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/03 23:17:48 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ void	read_map(char *map_name, t_map *map)
 
 	i = 0;
 	fd = open(map_name, O_RDONLY);
-	if (fd == -1)
+	if (fd < 0)
+		exit_game(map);
+	map->map = malloc(sizeof(char *) * (map->rows + 1));
+	if (!map->map)
 	{
-		write(1, "open map Error\n", 16);
+		write(1, "Error: Memory allocation failed.\n", 33);
 		exit(1);
 	}
-	map->map = malloc(sizeof(char *) * (map->rows + 1));
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -76,8 +78,8 @@ void	wall_check(t_map *map)
 		x = 0;
 		while (x < map->columns)
 		{
-			if ((y == 0 || y == map->rows - 1 || x == 0
-			|| x == map->columns - 1) && map->map[y][x] != '1')
+			if ((y == 0 || y == map->rows - 1 || x == 0 || x == map->columns
+					- 1) && map->map[y][x] != '1')
 			{
 				write(1, "Error: Map not enclosed by walls.\n", 33);
 				exit(1);

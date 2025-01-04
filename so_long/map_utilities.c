@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 14:01:32 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/01 15:03:22 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/02 17:26:27 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,25 @@
 
 void	is_rect(char **map)
 {
-	int	y;
-	int	x;
+	size_t	len;
+	int		i;
 
-	y = 0;
-	while (map[y])
+	i = 0;
+	len = ft_strlen(map[0]);
+	while (map[i])
 	{
-		x = 0;
-		while (map[y][x])
-			x++;
-		if (x != (int)ft_strlen(map[0]))
+		if (ft_strlen(map[i]) != len)
 		{
 			write(1, "Error: Map is not rectangular.\n", 31);
 			exit(1);
 		}
-		y++;
+		i++;
 	}
 }
 
 void	map_name(char *map_name)
 {
-	int		len;
+	int	len;
 
 	len = ft_strlen(map_name);
 	if (len < 5 || map_name[len - 4] != '.' || map_name[len - 3] != 'b'
