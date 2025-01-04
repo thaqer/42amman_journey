@@ -6,7 +6,7 @@ MLX_FLAGS = -Lminilibx -lmlx -lXext -lX11 -lbsd
 NAME = so_long
 
 SRCS = map.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
-       main.c so_long.c map_utilities.c window.c free.c
+       main.c so_long.c map_utilities.c window.c free.c flood_fill.c 
 
 LIBFT_DIR = ../so_long/libft
 LIBFT = $(LIBFT_DIR)/libft.a

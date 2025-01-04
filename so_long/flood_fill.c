@@ -3,21 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbaniatt <tbaniatt@student.42.fr>          #+#  +:+       +#+        */
+/*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-04 11:10:51 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025-01-04 11:10:51 by tbaniatt         ###   ########.fr       */
+/*   Created: 2025/01/04 11:10:51 by tbaniatt          #+#    #+#             */
+/*   Updated: 2025/01/04 16:23:53 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	floot_fill(t_map *map)
+void	flood_fill(t_map *map, int x, int y, int *exit_found, char **map_copy)
 {
-	int	x;
-	int	y;
+	if (x < 0 || y < 0 || x >= map->rows || y >= map->columns)
+		return ;
+	if (map_copy[x][y] == '1' || map_copy[x][y] == 'V')
+		return ;
+	if (map_copy[x][y] == 'C')
+		map->collectable--;
+	if (map_copy[x][y] != 'E')
+		map_copy[x][y] = 'V';
+	if (map_copy[x][y] == 'E' && map->collectable == 0)
+	{
+		*exit_found = 1;
+		return ;
+	}
+	flood_fill(map, x + 1, y, exit_found, map_copy);
+	flood_fill(map, x - 1, y, exit_found, map_copy);
+	flood_fill(map, x, y + 1, exit_found, map_copy);
+	flood_fill(map, x, y - 1, exit_found, map_copy);
+}
 
+void	find_player(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->rows)
+	{
+		j = 0;
+		while (j < map->columns)
+		{
+			if (map->map[i][j] == 'P')
+			{
+				map->player_x = i;
+				map->player_y = j;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	validate_path(t_map *map)
+{
+	int 	x;
+	int	exit_found;
+	char	**map_copy;
+
+	exit_found = 0;
 	x = 0;
-	y = 0;
-	if ()
+	find_player(map);
+	map_copy = malloc(sizeof(char *) * map->rows);
+	while (x < map->rows)
+	{
+		map_copy[x] = malloc(sizeof(char) * map->columns);
+		if (!map_copy[x])
+		{
+			while (x >= 0)
+				free(map_copy[x--]);
+			free(map_copy);
+			exit_game_error(map);
+		}
+		ft_memcpy(map_copy[x], map->map[x], map->columns);
+		x++;
+	}
+	flood_fill(map, map->player_x, map->player_y, &exit_found, map_copy);
+	while (x >= 0)
+		free(map_copy[x--]);
+			free(map_copy);
+	if (map->collectable > 0 || !exit_found)
+		exit_game_error(map);
 }

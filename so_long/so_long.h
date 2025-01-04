@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:15:06 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/03 22:40:49 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/04 16:21:27 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,8 @@ void			moving(t_map *map, int new_x, int new_y);
 void			update_position(t_map *map, int new_x, int new_y);
 void			exit_game(t_map *map);
 void			exit_game_error(t_map *map);
+void			flood_fill(t_map *map, int x, int y, int *exit_found, char **map_copy);
+void			find_player(t_map *map);
+void			validate_path(t_map *map);
 
 #endif
