@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:15:06 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/04 18:53:41 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/06 22:39:19 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_map
 	int			collectable;
 	int			player_x;
 	int			player_y;
+	int			move;
 	int			exit_found;
 	t_photos	*photos;
 }				t_map;
@@ -96,5 +97,7 @@ void			exit_game_error(t_map *map, char *message);
 void			flood_fill(t_map *map, int x, int y, char **map_copy);
 void			find_player(t_map *map);
 void			validate_path(t_map *map);
+void			move(t_map *map, int new_x, int new_y);
+void			protection(int x, t_map *map, char **map_copy);
 
 #endif

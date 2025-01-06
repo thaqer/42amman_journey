@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:21:00 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/04 19:21:33 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/06 22:32:05 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,14 @@ void	key_move(int keycode, t_map *map)
 			&& map->collectable != 0))
 		return ;
 	else
-		moving(map, new_x, new_y);
+		move(map, new_x, new_y);
+}
+
+void	move(t_map *map, int new_x, int new_y)
+{
+	map->move++;
+	ft_printf("Moves: %d\n", map->move);
+	moving(map, new_x, new_y);
 	mlx_clear_window(map->mlx, map->win);
 	map_runder(map->photos, map);
 }

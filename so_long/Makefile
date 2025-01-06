@@ -11,17 +11,25 @@ SRCS = map.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 LIBFT_DIR = ../so_long/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
+PRINTF_DIR = ../so_long/printf
+PRINTF = $(PRINTF_DIR)/libftprintf.a
+
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
 
 # Link object files with libraries
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) $(MLX_FLAGS) -o $(NAME)
 
+# Build libft
 $(LIBFT):
 	make -C $(LIBFT_DIR)
+
+# Build ft_printf
+$(PRINTF):
+	make -C $(PRINTF_DIR)
 
 # Create object directory and compile source files
 $(OBJ_DIR)/%.o: %.c
@@ -31,10 +39,12 @@ $(OBJ_DIR)/%.o: %.c
 # Clean up object files
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(PRINTF_DIR) clean
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(PRINTF_DIR) fclean
 	rm -f $(NAME)
 
 # Rebuild the project
