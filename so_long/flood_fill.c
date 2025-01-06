@@ -28,9 +28,9 @@ void	flood_fill(t_map *map, int x, int y, char **map_copy)
 		return ;
 	}
 	flood_fill(map, x + 1, y, map_copy);
+	flood_fill(map, x, y - 1, map_copy);
 	flood_fill(map, x - 1, y, map_copy);
 	flood_fill(map, x, y + 1, map_copy);
-	flood_fill(map, x, y - 1, map_copy);
 }
 
 void	find_player(t_map *map)
@@ -78,9 +78,13 @@ void	validate_path(t_map *map)
 		x++;
 	}
 	flood_fill(map, map->player_x, map->player_y, map_copy);
+	x = map->rows - 1;
 	while (x >= 0)
-		free(map_copy[x--]);
-			free(map_copy);
+	{
+		free(map_copy[x]);
+		x--;
+	}
+	free(map_copy);
 	if (map->collectable > 0 || !map->exit_found)
 		exit_game_error(map, "Map has no valid path");
 }
