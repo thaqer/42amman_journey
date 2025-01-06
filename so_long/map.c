@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:52:04 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/03 23:17:48 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/04 19:07:27 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	dimensions(char *map_name, t_map *map)
 
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
-		exit_game_error(map);
+		exit_game_error(map, "Map file not found");
 	line = get_next_line(fd);
 	if (!line)
-		exit_game_error(map);
+		exit_game_error(map, "Map file is empty");
 	map->columns = ft_strlen(line) - 1;
 	map->rows = 0;
 	while (line)
@@ -46,7 +46,7 @@ void	read_map(char *map_name, t_map *map)
 		exit_game(map);
 	map->map = malloc(sizeof(char *) * (map->rows + 1));
 	if (!map->map)
-		exit_game_error(map);
+		exit_game_error(map, "Malloc failed");
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -69,9 +69,11 @@ void	wall_check(t_map *map)
 		x = 0;
 		while (x < map->columns)
 		{
-			if ((y == 0 || y == map->rows - 1 || x == 0 || x == map->columns
-					- 1) && map->map[y][x] != '1')
-				exit_game_error(map);
+			if (y == 0 || y == map->rows - 1 || x == 0 || x == map->columns - 1)
+			{
+				if (map->map[y][x] != '1')
+					exit_game_error(map, "Map is not surrounded by walls");
+			}
 			x++;
 		}
 		y++;
@@ -108,11 +110,11 @@ void	required_elements(t_map *map)
 void	required_error(t_map *map)
 {
 	if (map->player != 1)
-		exit_game_error(map);
+		exit_game_error(map, "Map has no player or has more than one player");
 	if (map->exit != 1)
-		exit_game_error(map);
+		exit_game_error(map, "Map has no exit or has more than one exit");
 	if (map->collectable <= 0)
-		exit_game_error(map);
+		exit_game_error(map, "Map has no collectables");
 	if (map->columns < 3 || map->rows < 3)
-		exit_game_error(map);
+		exit_game_error(map, "Map is too small");
 }

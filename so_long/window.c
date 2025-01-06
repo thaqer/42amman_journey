@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:21:00 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/04 00:35:32 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/04 19:21:33 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	open_window(t_map *map)
 	map->photos = photos;
 	map_runder(photos, map);
 	mlx_hook(map->win, 17, 0, close_window, map);
-	mlx_key_hook(map->win, handle_keypress, map);
+	mlx_hook(map->win, 2, 1L << 0, handle_keypress, map);
 	mlx_loop(map->mlx);
 }
 

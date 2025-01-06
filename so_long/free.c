@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 18:57:23 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/03 23:41:14 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/04 18:54:06 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	exit_game(t_map *map)
 	exit(EXIT_FAILURE);
 }
 
-void	exit_game_error(t_map *map)
+void	exit_game_error(t_map *map, char *message)
 {
 	cleanup_resources(map);
-	perror("error: ");
+	printf("Error: %s\n", message);
 	exit(EXIT_FAILURE);
 }
 

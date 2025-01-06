@@ -6,13 +6,13 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 11:10:51 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/04 16:23:53 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/04 18:54:55 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	flood_fill(t_map *map, int x, int y, int *exit_found, char **map_copy)
+void	flood_fill(t_map *map, int x, int y, char **map_copy)
 {
 	if (x < 0 || y < 0 || x >= map->rows || y >= map->columns)
 		return ;
@@ -24,13 +24,13 @@ void	flood_fill(t_map *map, int x, int y, int *exit_found, char **map_copy)
 		map_copy[x][y] = 'V';
 	if (map_copy[x][y] == 'E' && map->collectable == 0)
 	{
-		*exit_found = 1;
+		map->exit_found = 1;
 		return ;
 	}
-	flood_fill(map, x + 1, y, exit_found, map_copy);
-	flood_fill(map, x - 1, y, exit_found, map_copy);
-	flood_fill(map, x, y + 1, exit_found, map_copy);
-	flood_fill(map, x, y - 1, exit_found, map_copy);
+	flood_fill(map, x + 1, y, map_copy);
+	flood_fill(map, x - 1, y, map_copy);
+	flood_fill(map, x, y + 1, map_copy);
+	flood_fill(map, x, y - 1, map_copy);
 }
 
 void	find_player(t_map *map)
@@ -59,10 +59,8 @@ void	find_player(t_map *map)
 void	validate_path(t_map *map)
 {
 	int 	x;
-	int	exit_found;
 	char	**map_copy;
 
-	exit_found = 0;
 	x = 0;
 	find_player(map);
 	map_copy = malloc(sizeof(char *) * map->rows);
@@ -74,15 +72,15 @@ void	validate_path(t_map *map)
 			while (x >= 0)
 				free(map_copy[x--]);
 			free(map_copy);
-			exit_game_error(map);
+			exit_game_error(map, "Memory allocation failed");
 		}
 		ft_memcpy(map_copy[x], map->map[x], map->columns);
 		x++;
 	}
-	flood_fill(map, map->player_x, map->player_y, &exit_found, map_copy);
+	flood_fill(map, map->player_x, map->player_y, map_copy);
 	while (x >= 0)
 		free(map_copy[x--]);
 			free(map_copy);
-	if (map->collectable > 0 || !exit_found)
-		exit_game_error(map);
+	if (map->collectable > 0 || !map->exit_found)
+		exit_game_error(map, "Map has no valid path");
 }
