@@ -6,18 +6,19 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:15:06 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/06 22:39:19 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/07 10:12:23 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# define WALL "../so_long/photos/wall.xpm"
-# define FLOOR "../so_long/photos/floor.xpm"
-# define PLAYER "../so_long/photos/player.xpm"
-# define COLLECTABLE "../so_long/photos/collectable.xpm"
-# define EXIT "../so_long/photos/exit.xpm"
+# define WALL "../so_long/photo/wall.xpm"
+# define FLOOR "../so_long/photo/floor.xpm"
+# define PLAYER "../so_long/photo/player.xpm"
+# define COLLECTABLE "../so_long/photo/collectable.xpm"
+# define EXIT "../so_long/photo/exit.xpm"
+# define EXIT_WIN "../so_long/photo/exit_win.xpm"
 
 # define ESC 65307
 # define W 119
@@ -28,8 +29,8 @@
 # define DOWN 65364
 # define LEFT 65361
 # define RIGHT 65363
-# define WIDTH 64
-# define HEIGHT 64
+# define WIDTH 50
+# define HEIGHT 50
 
 # include "../so_long/get_next_line/get_next_line.h"
 # include "../so_long/libft/libft.h"
@@ -48,6 +49,7 @@ typedef struct s_photos
 	void		*player;
 	void		*collectable;
 	void		*exit;
+	void		*exit_win;
 	void		*img;
 }				t_photos;
 

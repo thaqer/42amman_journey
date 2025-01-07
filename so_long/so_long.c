@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:17:19 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/03 23:18:19 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/07 10:12:37 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	init_photos(t_photos *photos, t_map *map)
 	photos->collectable = mlx_xpm_file_to_image(map->mlx, COLLECTABLE, &wid,
 			&h);
 	photos->exit = mlx_xpm_file_to_image(map->mlx, EXIT, &wid, &h);
+	photos->exit_win = mlx_xpm_file_to_image(map->mlx, EXIT_WIN, &wid, &h);
 	if (!photos->wall || !photos->floor || !photos->player
 		|| !photos->collectable || !photos->exit)
 		exit_game(map);
@@ -63,7 +64,12 @@ void	put_image(t_photos *photos, t_map *map, int x, int y)
 	else if (map->map[y][x] == 'C')
 		photos->img = photos->collectable;
 	else if (map->map[y][x] == 'E')
-		photos->img = photos->exit;
+	{
+		if (map->collectable == 0)
+			photos->img = photos->exit_win;
+		else
+			photos->img = photos->exit;
+	}
 	if (photos->img)
 		mlx_put_image_to_window(map->mlx, map->win, photos->img, x * WIDTH, y
 			* HEIGHT);

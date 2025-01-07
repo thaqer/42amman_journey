@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 18:57:23 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/04 18:54:06 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/07 10:13:07 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	image_destroy(t_map *map)
 			mlx_destroy_image(map->mlx, map->photos->collectable);
 		if (map->photos->exit)
 			mlx_destroy_image(map->mlx, map->photos->exit);
+		if (map->photos->exit_win)
+			mlx_destroy_image(map->mlx, map->photos->exit_win);
 		free(map->photos);
 		map->photos = NULL;
 	}
