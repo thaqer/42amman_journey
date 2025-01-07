@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 14:01:32 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/04 18:56:14 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/07 13:02:28 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,26 @@ void	map_name(char *map_name, t_map *map)
 	if (len < 5 || map_name[len - 4] != '.' || map_name[len - 3] != 'b'
 		|| map_name[len - 2] != 'e' || map_name[len - 1] != 'r')
 		exit_game_error(map, "Map file is not a .ber file");
+}
+
+void	wall_check(t_map *map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < map->rows)
+	{
+		x = 0;
+		while (x < map->columns - 1)
+		{
+			if (y == 0 || y == map->rows - 1 || x == 0 || x == map->columns - 1)
+			{
+				if (map->map[y][x] != '1')
+					exit_game_error(map, "Map is not surrounded by walls");
+			}
+			x++;
+		}
+		y++;
+	}
 }

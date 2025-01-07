@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:52:04 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/04 19:07:27 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/07 13:02:38 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,18 @@ void	read_map(char *map_name, t_map *map)
 	close(fd);
 }
 
-void	wall_check(t_map *map)
+void	checker(t_map *map, int x, int y)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < map->rows)
-	{
-		x = 0;
-		while (x < map->columns)
-		{
-			if (y == 0 || y == map->rows || x == 0 || x == map->columns)
-			{
-				if (map->map[y][x] != '1')
-					exit_game_error(map, "Map is not surrounded by walls");
-			}
-			x++;
-		}
-		y++;
-	}
+	if (map->map[y][x] != '1' && map->map[y][x] != '0'
+		&& map->map[y][x] != 'P' && map->map[y][x] != 'E'
+		&& map->map[y][x] != 'C')
+		exit_game_error(map, "Map contains invalid characters");
+	if (map->map[y][x] == 'P')
+		map->player++;
+	if (map->map[y][x] == 'E')
+		map->exit++;
+	if (map->map[y][x] == 'C')
+		map->collectable++;
 }
 
 void	required_elements(t_map *map)
@@ -92,14 +84,9 @@ void	required_elements(t_map *map)
 	while (y < map->rows)
 	{
 		x = 0;
-		while (x < map->columns)
+		while (x < map->columns - 1)
 		{
-			if (map->map[y][x] == 'P')
-				map->player++;
-			if (map->map[y][x] == 'E')
-				map->exit++;
-			if (map->map[y][x] == 'C')
-				map->collectable++;
+			checker(map, x, y);
 			x++;
 		}
 		y++;
