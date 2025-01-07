@@ -69,7 +69,7 @@ void	wall_check(t_map *map)
 		x = 0;
 		while (x < map->columns)
 		{
-			if (y == 0 || y == map->rows - 1 || x == 0 || x == map->columns - 1)
+			if (y == 0 || y == map->rows || x == 0 || x == map->columns)
 			{
 				if (map->map[y][x] != '1')
 					exit_game_error(map, "Map is not surrounded by walls");
