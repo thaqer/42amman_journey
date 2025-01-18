@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:52:04 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/07 13:02:38 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/07 13:13:15 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	checker(t_map *map, int x, int y)
 		map->collectable++;
 }
 
-void	required_elements(t_map *map)
+ void	required_elements(t_map *map)
 {
 	int	y;
 	int	x;
