@@ -57,7 +57,7 @@ void	moving(t_map *map, int new_x, int new_y)
 		update_position(map, new_x, new_y);
 		map->collectable--;
 	}
-	else if (map->map[new_y][new_x] == 'E' && map->collectable == 0)
+	else if (map->map[new_y][new_x] == 'E')
 	{
 		update_position(map, new_x, new_y);
 		write(1, "You win!\n", 9);

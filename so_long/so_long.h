@@ -65,6 +65,8 @@ typedef struct s_map
 	int			collectable;
 	int			player_x;
 	int			player_y;
+	int			exit_x;
+	int			exit_y;
 	int			move;
 	int			exit_found;
 	t_photos	*photos;

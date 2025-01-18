@@ -46,7 +46,7 @@ void	wall_check(t_map *map)
 	while (y < map->rows)
 	{
 		x = 0;
-		while (x < map->columns - 1)
+		while (x < map->columns)
 		{
 			if (y == 0 || y == map->rows - 1 || x == 0 || x == map->columns - 1)
 			{

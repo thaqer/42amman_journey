@@ -23,7 +23,7 @@ void	dimensions(char *map_name, t_map *map)
 	line = get_next_line(fd);
 	if (!line)
 		exit_game_error(map, "Map file is empty");
-	map->columns = ft_strlen(line) - 1;
+	map->columns = ft_strlen(line) - 2;
 	map->rows = 0;
 	while (line)
 	{
@@ -48,6 +48,8 @@ void	read_map(char *map_name, t_map *map)
 	if (!map->map)
 		exit_game_error(map, "Malloc failed");
 	line = get_next_line(fd);
+	if (!line)
+		exit_game_error(map, "Map file is empty");
 	while (line)
 	{
 		map->map[i] = line;
@@ -72,7 +74,7 @@ void	checker(t_map *map, int x, int y)
 		map->collectable++;
 }
 
- void	required_elements(t_map *map)
+void	required_elements(t_map *map)
 {
 	int	y;
 	int	x;
