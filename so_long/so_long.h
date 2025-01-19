@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:15:06 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/18 20:32:32 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:33:24 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void			read_map(char *map_name, t_map *map);
 void			wall_check(t_map *map);
 void			required_elements(t_map *map);
 void			required_error(t_map *map);
-void			is_rect(char **map, t_map *map1);
+void			is_rect(t_map *map);
 void			map_name(char *map_name, t_map *map);
 void			open_window(t_map *map);
 int				close_window(t_map *map);

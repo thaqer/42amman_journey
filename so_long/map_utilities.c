@@ -6,23 +6,23 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 14:01:32 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/07 13:02:28 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:19:00 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	is_rect(char **map_copy, t_map *map1)
+void	is_rect(t_map *map)
 {
 	size_t	len;
 	int		i;
 
 	i = 0;
-	len = ft_strlen(map_copy[0]);
-	while (map_copy[i])
+	len = ft_strlen(map->map[0]);
+	while (map->map[i])
 	{
-		if (ft_strlen(map_copy[i]) != len)
-			exit_game_error(map1, "Map is not a rectangle");
+		if (ft_strlen(map->map[i]) != len)
+			exit_game_error(map, "Map is not a rectangle");
 		i++;
 	}
 }
@@ -43,12 +43,11 @@ void	wall_check(t_map *map)
 	int	x;
 
 	y = 0;
-	ft_printf("%d\n%d",map->rows, map->columns);
-	
+	ft_printf("%d\n%d", map->rows, map->columns);
 	while (y <= map->rows - 1)
 	{
 		x = 0;
-		while (x <=  map->columns - 1)
+		while (x <= map->columns - 1)
 		{
 			if (y == 0 || y == map->rows - 1 || x == 0 || x == map->columns - 1)
 			{
@@ -63,17 +62,19 @@ void	wall_check(t_map *map)
 
 void	remove_newline(t_map *map)
 {
-	int	x;
-	int y;
+	int	i;
+	int	j;
 
-	x = 0;
-	y = 0;
-	while (map->map[y][x] != '\0')
-		x++;
-	while (map->map[y])
+	i = 0;
+	while (map->map[i])
 	{
-		if (x > 0 && map->map[y][x - 1] == '\n')
-			map->map[y][x - 1] = '\0';
-		y++;
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] == '\n')
+				map->map[i][j] = '\0';
+			j++;
+		}
+		i++;
 	}
 }
