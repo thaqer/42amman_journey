@@ -103,6 +103,6 @@ void			find_player(t_map *map);
 void			validate_path(t_map *map);
 void			move(t_map *map, int new_x, int new_y);
 void			protection(int x, t_map *map, char **map_copy);
-void print_map_copy(char **map_copy, int rows);
+void			remove_newline(t_map *map);
 
 #endif

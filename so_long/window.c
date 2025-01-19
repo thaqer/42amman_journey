@@ -32,8 +32,8 @@ void	open_window(t_map *map)
 		free(photos);
 		exit_game(map);
 	}
-	init_photos(photos, map);
 	map->photos = photos;
+	init_photos(photos, map);
 	map_runder(photos, map);
 	mlx_hook(map->win, 17, 0, close_window, map);
 	mlx_hook(map->win, 2, 1L << 0, handle_keypress, map);

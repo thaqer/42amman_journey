@@ -49,8 +49,11 @@ void	init_photos(t_photos *photos, t_map *map)
 	photos->exit = mlx_xpm_file_to_image(map->mlx, EXIT, &wid, &h);
 	photos->exit_win = mlx_xpm_file_to_image(map->mlx, EXIT_WIN, &wid, &h);
 	if (!photos->wall || !photos->floor || !photos->player
-		|| !photos->collectable || !photos->exit)
+		|| !photos->collectable || !photos->exit || !photos->exit_win)
+	{
+		exit_game_error(map, "invaid image");
 		exit_game(map);
+	}
 }
 
 void	put_image(t_photos *photos, t_map *map, int x, int y)

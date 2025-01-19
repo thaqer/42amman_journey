@@ -30,10 +30,11 @@ int	main(int argc, char **argv)
 	map_name(argv[1], map);
 	dimensions(argv[1], map);
 	read_map(argv[1], map);
+	// remove_newline(map);
 	wall_check(map);
 	is_rect(map->map, map);
 	required_elements(map);
-	// validate_path(map);
+	validate_path(map);
 	required_elements(map);
 	open_window(map);
 	cleanup_resources(map);

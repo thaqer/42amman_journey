@@ -43,10 +43,12 @@ void	wall_check(t_map *map)
 	int	x;
 
 	y = 0;
-	while (y < map->rows)
+	ft_printf("%d\n%d",map->rows, map->columns);
+	
+	while (y <= map->rows - 1)
 	{
 		x = 0;
-		while (x < map->columns)
+		while (x <=  map->columns - 1)
 		{
 			if (y == 0 || y == map->rows - 1 || x == 0 || x == map->columns - 1)
 			{
@@ -55,6 +57,23 @@ void	wall_check(t_map *map)
 			}
 			x++;
 		}
+		y++;
+	}
+}
+
+void	remove_newline(t_map *map)
+{
+	int	x;
+	int y;
+
+	x = 0;
+	y = 0;
+	while (map->map[y][x] != '\0')
+		x++;
+	while (map->map[y])
+	{
+		if (x > 0 && map->map[y][x - 1] == '\n')
+			map->map[y][x - 1] = '\0';
 		y++;
 	}
 }

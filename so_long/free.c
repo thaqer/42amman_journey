@@ -21,7 +21,7 @@ void	exit_game(t_map *map)
 void	exit_game_error(t_map *map, char *message)
 {
 	cleanup_resources(map);
-	printf("Error: %s\n", message);
+	ft_printf("Error: %s\n", message);
 	exit(EXIT_FAILURE);
 }
 

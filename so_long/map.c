@@ -19,10 +19,16 @@ void	dimensions(char *map_name, t_map *map)
 
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
+	{
+		close(fd);
 		exit_game_error(map, "Map file not found");
+	}
 	line = get_next_line(fd);
 	if (!line)
+	{
+		close(fd);
 		exit_game_error(map, "Map file is empty");
+	}
 	map->columns = ft_strlen(line) - 2;
 	map->rows = 0;
 	while (line)
