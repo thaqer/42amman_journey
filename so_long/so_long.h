@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 10:15:06 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/07 10:12:23 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/18 20:32:32 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ void			find_player(t_map *map);
 void			validate_path(t_map *map);
 void			move(t_map *map, int new_x, int new_y);
 void			protection(int x, t_map *map, char **map_copy);
+void print_map_copy(char **map_copy, int rows);
 
 #endif

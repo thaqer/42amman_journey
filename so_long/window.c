@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:21:00 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/07 10:11:09 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/18 19:46:10 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	open_window(t_map *map)
 void	update_position(t_map *map, int new_x, int new_y)
 {
 	map->map[new_y][new_x] = 'P';
-	map->map[map->player_y][map->player_x] = '0';
+	if (map->player_x == map->exit_x && map->player_y == map->exit_y)
+		map->map[map->player_y][map->player_x] = 'E';
+	else
+		map->map[map->player_y][map->player_x] = '0';
 	map->player_x = new_x;
 	map->player_y = new_y;
 }
@@ -59,10 +62,14 @@ void	moving(t_map *map, int new_x, int new_y)
 	}
 	else if (map->map[new_y][new_x] == 'E')
 	{
-		update_position(map, new_x, new_y);
-		write(1, "You win!\n", 9);
-		cleanup_resources(map);
-		exit(0);
+		if (map->collectable != 0)
+			update_position(map, new_x, new_y);
+		else
+		{
+			write(1, "You win!\n", 9);
+			cleanup_resources(map);
+			exit(0);
+		}
 	}
 }
 
@@ -84,8 +91,7 @@ void	key_move(int keycode, t_map *map)
 	else if (keycode == D || keycode == RIGHT)
 		new_x++;
 	if (new_x < 0 || new_x >= map->columns || new_y < 0 || new_y >= map->rows
-		|| map->map[new_y][new_x] == '1' || (map->map[new_y][new_x] == 'E'
-			&& map->collectable != 0))
+		|| map->map[new_y][new_x] == '1')
 		return ;
 	else
 		move(map, new_x, new_y);

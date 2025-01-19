@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 21:12:02 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/07 11:07:19 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/19 10:28:59 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 	wall_check(map);
 	is_rect(map->map, map);
 	required_elements(map);
-	validate_path(map);
+	// validate_path(map);
 	required_elements(map);
 	open_window(map);
 	cleanup_resources(map);

@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:52:04 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/07 13:13:15 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/18 19:47:38 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,11 @@ void	checker(t_map *map, int x, int y)
 	if (map->map[y][x] == 'P')
 		map->player++;
 	if (map->map[y][x] == 'E')
+	{
+		map->exit_x = x;
+		map->exit_y = y;
 		map->exit++;
+	}
 	if (map->map[y][x] == 'C')
 		map->collectable++;
 }
