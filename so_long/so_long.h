@@ -13,12 +13,12 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# define WALL "../so_long/photo/wall.xpm"
-# define FLOOR "../so_long/photo/floor.xpm"
-# define PLAYER "../so_long/photo/player.xpm"
-# define COLLECTABLE "../so_long/photo/collectable.xpm"
-# define EXIT "../so_long/photo/exit.xpm"
-# define EXIT_WIN "../so_long/photo/exit_win.xpm"
+# define WALL "textures/wall.xpm"
+# define FLOOR "textures/floor.xpm"
+# define PLAYER "textures/player.xpm"
+# define COLLECTABLE "textures/collectable.xpm"
+# define EXIT "textures/exit.xpm"
+# define EXIT_WIN "textures/exit_win.xpm"
 
 # define ESC 65307
 # define W 119
@@ -32,9 +32,9 @@
 # define WIDTH 50
 # define HEIGHT 50
 
-# include "../so_long/get_next_line/get_next_line.h"
-# include "../so_long/libft/libft.h"
-# include "../so_long/printf/ft_printf.h"
+# include "get_next_line/get_next_line.h"
+# include "libft/libft.h"
+# include "printf/ft_printf.h"
 # include <fcntl.h>
 # include <mlx.h>
 # include <stdio.h>
@@ -104,5 +104,9 @@ void			validate_path(t_map *map);
 void			move(t_map *map, int new_x, int new_y);
 void			protection(int x, t_map *map, char **map_copy);
 void			remove_newline(t_map *map);
+void			n_remo(t_map *map);
+void			special_cleanup_resources(t_map *map);
+void			image_destroy(t_map *map);
+void			special_exit_game_error(t_map *map, char *message);
 
 #endif

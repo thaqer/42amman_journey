@@ -40,3 +40,42 @@ int	main(int argc, char **argv)
 	free(map);
 	return (0);
 }
+
+void	special_cleanup_resources(t_map *map)
+{
+	if (map->photos)
+		image_destroy(map);
+	if (map->map)
+	{
+		free(map->map);
+		map->map = NULL;
+	}
+	if (map->mlx)
+	{
+		if (map->win)
+			mlx_destroy_window(map->mlx, map->win);
+		mlx_destroy_display(map->mlx);
+		free(map->mlx);
+		map->mlx = NULL;
+	}
+	free(map);
+}
+
+void	n_remo(t_map *map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map->map[y])
+	{
+		x = 0;
+		while (map->map[y][x])
+		{
+			if (map->map[y][x] == '\n')
+				map->map[y][x] = '\0';
+			x++;
+		}
+		y++;
+	}
+}

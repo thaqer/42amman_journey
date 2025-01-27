@@ -8,10 +8,10 @@ NAME = so_long
 SRCS = map.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
        main.c so_long.c map_utilities.c window.c free.c flood_fill.c 
 
-LIBFT_DIR = ../so_long/libft
+LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-PRINTF_DIR = ../so_long/printf
+PRINTF_DIR = printf
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
 OBJ_DIR = obj

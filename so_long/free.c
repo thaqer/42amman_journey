@@ -25,6 +25,13 @@ void	exit_game_error(t_map *map, char *message)
 	exit(EXIT_FAILURE);
 }
 
+void	special_exit_game_error(t_map *map, char *message)
+{
+	special_cleanup_resources(map);
+	ft_printf("Error: %s\n", message);
+	exit(EXIT_FAILURE);
+}
+
 void	image_destroy(t_map *map)
 {
 	if (map->photos)
@@ -55,12 +62,13 @@ void	cleanup_resources(t_map *map)
 		image_destroy(map);
 	if (map->map)
 	{
-		while (x < map->rows)
+		while (x < map->rows && map->map[x])
 		{
 			free(map->map[x]);
 			x++;
 		}
 		free(map->map);
+		map->map = NULL;
 	}
 	if (map->mlx)
 	{
@@ -68,6 +76,7 @@ void	cleanup_resources(t_map *map)
 			mlx_destroy_window(map->mlx, map->win);
 		mlx_destroy_display(map->mlx);
 		free(map->mlx);
+		map->mlx = NULL;
 	}
 	free(map);
 }

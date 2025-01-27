@@ -14,8 +14,8 @@
 
 void	dimensions(char *map_name, t_map *map)
 {
-	int		fd;
 	char	*line;
+	int		fd;
 
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
@@ -55,7 +55,10 @@ void	read_map(char *map_name, t_map *map)
 		exit_game_error(map, "Malloc failed");
 	line = get_next_line(fd);
 	if (!line)
-		exit_game_error(map, "Map file is empty");
+	{
+		close(fd);
+		special_exit_game_error(map, "Map file is empty");
+	}
 	while (line)
 	{
 		map->map[i] = line;
@@ -68,9 +71,8 @@ void	read_map(char *map_name, t_map *map)
 
 void	checker(t_map *map, int x, int y)
 {
-	if (map->map[y][x] != '1' && map->map[y][x] != '0'
-		&& map->map[y][x] != 'P' && map->map[y][x] != 'E'
-		&& map->map[y][x] != 'C')
+	if (map->map[y][x] != '1' && map->map[y][x] != '0' && map->map[y][x] != 'P'
+		&& map->map[y][x] != 'E' && map->map[y][x] != 'C')
 		exit_game_error(map, "Map contains invalid characters");
 	if (map->map[y][x] == 'P')
 		map->player++;

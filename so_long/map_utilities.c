@@ -16,13 +16,20 @@ void	is_rect(t_map *map)
 {
 	size_t	len;
 	int		i;
+	size_t	j;
 
 	i = 0;
+	j = 0;
 	len = ft_strlen(map->map[0]);
 	while (map->map[i])
 	{
-		if (ft_strlen(map->map[i]) != len)
+		j = ft_strlen(map->map[i]);
+		if (i == map->rows - 1 && map->map[i][j - 1] != '\n')
+			len -= 1;
+		if (j != len)
+		{
 			exit_game_error(map, "Map is not a rectangle");
+		}
 		i++;
 	}
 }
@@ -43,7 +50,6 @@ void	wall_check(t_map *map)
 	int	x;
 
 	y = 0;
-	ft_printf("%d\n%d", map->rows, map->columns);
 	while (y <= map->rows - 1)
 	{
 		x = 0;
@@ -52,12 +58,15 @@ void	wall_check(t_map *map)
 			if (y == 0 || y == map->rows - 1 || x == 0 || x == map->columns - 1)
 			{
 				if (map->map[y][x] != '1')
+				{
 					exit_game_error(map, "Map is not surrounded by walls");
+				}
 			}
 			x++;
 		}
 		y++;
 	}
+	n_remo(map);
 }
 
 void	remove_newline(t_map *map)
