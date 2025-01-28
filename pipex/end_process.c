@@ -6,12 +6,10 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:20:00 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/16 14:20:01 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/27 22:41:32 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../pipex/ft_libft/libft.h"
 #include "pipex.h"
 
 void	error_message(char *message, t_cmd *cmd)

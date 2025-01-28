@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 10:42:26 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/01 21:25:11 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/27 22:47:12 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*get_command(char **cmd_path, char *cmd)
 
 	if (!cmd || !cmd_path)
 		return (NULL);
+	if (access(cmd, F_OK) == 0)
+		return (ft_strdup(cmd));
 	i = 0;
 	while (cmd_path[i])
 	{

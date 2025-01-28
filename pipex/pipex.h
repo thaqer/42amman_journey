@@ -6,14 +6,14 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 10:43:02 by tbaniatt          #+#    #+#             */
-/*   Updated: 2024/12/04 18:11:37 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/27 22:47:12 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "../pipex/ft_libft/libft.h"
+# include "ft_libft/libft.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
