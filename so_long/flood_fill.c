@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 11:10:51 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/19 10:28:12 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:43:06 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,6 @@ void	flood_fill(t_map *map, int x, int y, char **map_copy)
 	flood_fill(map, x, y - 1, map_copy);
 	if (i == 1)
 		map->exit_found = 1;
-}
-
-void	find_player(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < map->rows)
-	{
-		j = 0;
-		while (j < map->columns)
-		{
-			if (map->map[i][j] == 'P')
-			{
-				map->player_x = i;
-				map->player_y = j;
-				return ;
-			}
-			j++;
-		}
-		i++;
-	}
-	exit_game_error(map, "Player not found on map");
 }
 
 void	validate_path(t_map *map)

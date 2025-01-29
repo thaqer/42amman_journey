@@ -6,7 +6,7 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:52:04 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/01/18 19:47:38 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:42:54 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,11 @@ void	checker(t_map *map, int x, int y)
 		&& map->map[y][x] != 'E' && map->map[y][x] != 'C')
 		exit_game_error(map, "Map contains invalid characters");
 	if (map->map[y][x] == 'P')
+	{
+		map->player_x = x;
+		map->player_y = y;	
 		map->player++;
+	}
 	if (map->map[y][x] == 'E')
 	{
 		map->exit_x = x;
