@@ -12,18 +12,21 @@
 
 #include "../push_swap.h"
 
-void   init_stack_a(t_stack *a, int size)
+int	pull_stack(t_stack *stack)
 {
-    a->size = size;
-    a->index = 0;
-    a->array = malloc(sizeof(int) * a->size);
-    printf("Initialized stack a with size %d\n", a->size); // Debug print
+	int	value;
+
+	if (stack->size == 0)
+		return (INT_MIN);
+	value = stack->array[stack->index];
+	stack->index--;
+	stack->size--;
+	return (value);
 }
 
-void   init_stack_b(t_stack *b, int size)
+void	push_stack(t_stack *stack, int value)
 {
-    b->size = size;
-    b->index = 0;
-    b->array = malloc(sizeof(int) * b->size);
-    printf("Initialized stack b with size %d\n", b->size); // Debug print
+	stack->index++;
+	stack->size++;
+	stack->array[stack->index] = value;
 }

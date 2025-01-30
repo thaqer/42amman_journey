@@ -4,7 +4,11 @@ CFLAGS = -Wall -Werror -Wextra
 
 NAME = push_swap
 
-SRCS = src/main.c src/utils.c src/operations.c 
+SRCS = src/main.c\
+	src/utils.c\
+	src/operations.c\
+	src/init.c\
+	src/radix_sort.c\
 
 LIBFT = libft/libft.a
 PRINTF = printf/libftprintf.a

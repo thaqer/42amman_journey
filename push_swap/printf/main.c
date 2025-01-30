@@ -13,8 +13,7 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-
-int main(void)
+int	main(void)
 {
 	ft_printf("Character: %c\n", 'A');
 	ft_printf("String: %s\n", "Hello, world!");
