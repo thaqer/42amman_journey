@@ -4,10 +4,10 @@ CFLAGS = -Wall -Werror -Wextra
 
 NAME = push_swap
 
-SRCS = push_swap.c main.c
+SRCS = src/main.c src/utils.c src/operations.c 
 
 LIBFT = libft/libft.a
-PRINTF = ft_printf/libftprintf.a
+PRINTF = printf/libftprintf.a
 
 OBJS = $(addprefix objs/, $(SRCS:.c=.o))
 
@@ -20,21 +20,21 @@ $(LIBFT):
 	make -C libft
 
 $(PRINTF):
-	make -C ft_printf
+	make -C printf
 
 objs/%.o: %.c
-	@mkdir -p objs
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf objs
 	make -C libft clean
-	make -C ft_printf clean
+	make -C printf clean
 
 fclean: clean
 	rm -f $(NAME)
 	make -C libft fclean
-	make -C ft_printf fclean
+	make -C printf fclean
 
 re: fclean all
 
