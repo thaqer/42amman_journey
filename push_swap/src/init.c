@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbaniatt <tbaniatt@student.42.fr>          #+#  +:+       +#+        */
+/*   By: tbaniatt <tbaniatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025-01-30 18:55:22 by tbaniatt          #+#    #+#             */
 /*   Updated: 2025-01-30 18:55:22 by tbaniatt         ###   ########.fr       */
@@ -22,10 +22,10 @@ void	init_stack_a(t_stack *a, int size)
 
 void	init_stack_b(t_stack *b, int size)
 {
-	b->size = size;
-	b->index = size - 1;
-	b->array = malloc(sizeof(int) * b->size);
-	printf("Initialized stack b with size %d\n", b->size);
+	b->size = 0;
+	b->index = -1;
+	b->array = malloc(sizeof(int) * size);
+	printf("Initialized stack b with size %d\n", size);
 }
 
 void	init_arguments(t_stack *a, int argc, char **argv)
@@ -35,7 +35,7 @@ void	init_arguments(t_stack *a, int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		a->array[a->index] = ft_atoi(argv[i]);
+		a->array[a->size - 1 - a->index] = ft_atoi(argv[i]);
 		a->index--;
 		i++;
 	}
@@ -50,7 +50,7 @@ void	parse_arguments(t_stack *a, char *arg)
 	i = 0;
 	while (numbers[i])
 	{
-		a->array[a->index] = ft_atoi(numbers[i]);
+		a->array[a->size - 1 - a->index] = ft_atoi(numbers[i]);
 		a->index--;
 		i++;
 	}

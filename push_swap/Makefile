@@ -13,9 +13,9 @@ SRCS = src/main.c\
 LIBFT = libft/libft.a
 PRINTF = printf/libftprintf.a
 
-OBJS = $(addprefix objs/, $(SRCS:.c=.o))
+OBJS = $(SRCS:src/%.c=objs/%.o)
 
-all = $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) -o $(NAME)
@@ -26,7 +26,7 @@ $(LIBFT):
 $(PRINTF):
 	make -C printf
 
-objs/%.o: %.c
+objs/%.o: src/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 

@@ -35,19 +35,22 @@ int	main(int argc, char **argv)
 	}
 	printf("Before:\n");
 	print_stack(&a);
-	radix_sort(&a, &b);
-	printf("After:\n");
+	print_stack(&b);
+	sa(&a);
+	printf("After sorting:\n");
 	print_stack(&a);
+	print_stack(&b);
+	return (0);
 }
 
 void	print_stack(t_stack *a)
 {
 	int	i;
 
-	i = a->size - 1;
-	while (i > a->index)
+	i = 0;
+	while (i < a->size)
 	{
 		printf("%d\n", a->array[i]);
-		i--;
+		i++;
 	}
 }

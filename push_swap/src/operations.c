@@ -18,9 +18,9 @@ void	sa(t_stack *a)
 
 	if (a->size < 2 || !a->array)
 		return ;
-	tmp = a->array[a->index];
-	a->array[a->index] = a->array[a->index - 1];
-	a->array[a->index - 1] = tmp;
+	tmp = a->array[0];
+	a->array[0] = a->array[1];
+	a->array[1] = tmp;
 	write(1, "sa\n", 3);
 }
 
@@ -53,14 +53,14 @@ void	ra(t_stack *a)
 
 	if (a->size < 2 || !a->array)
 		return ;
-	tmp = a->array[a->index];
-	i = a->index;
-	while (i > 0)
+	tmp = a->array[0];
+	i = 0;
+	while (i < a->size - 1)
 	{
-		a->array[i] = a->array[i - 1];
-		i--;
+		a->array[i] = a->array[i + 1];
+		i++;
 	}
-	a->array[0] = tmp;
+	a->array[a->size - 1] = tmp;
 	write(1, "ra\n", 3);
 }
 
@@ -71,13 +71,13 @@ void	rra(t_stack *a)
 
 	if (a->size < 2 || !a->array)
 		return ;
-	tmp = a->array[0];
-	i = 0;
-	while (i < a->size - 1)
+	tmp = a->array[a->size - 1];
+	i = a->size - 1;
+	while (i > a->index)
 	{
-		a->array[i] = a->array[i + 1];
-		i++;
+		a->array[i] = a->array[i - 1];
+		i--;
 	}
-	a->array[a->size - 1] = tmp;
+	a->array[a->index] = tmp;
 	write(1, "rra\n", 4);
 }

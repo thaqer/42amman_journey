@@ -18,15 +18,19 @@ int	pull_stack(t_stack *stack)
 
 	if (stack->size == 0)
 		return (INT_MIN);
-	value = stack->array[stack->index];
-	stack->index--;
+	value = stack->array[0];
+	for (int i = 0; i < stack->size - 1; i++)
+	{
+		stack->array[i] = stack->array[i + 1];
+	}
 	stack->size--;
+	stack->index--;
 	return (value);
 }
 
 void	push_stack(t_stack *stack, int value)
 {
 	stack->index++;
-	stack->size++;
 	stack->array[stack->index] = value;
+	stack->size++;
 }
