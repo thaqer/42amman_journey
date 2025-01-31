@@ -33,24 +33,20 @@ int	main(int argc, char **argv)
 		init_stack_b(&b, argc - 1);
 		init_arguments(&a, argc, argv);
 	}
-	printf("Before:\n");
 	print_stack(&a);
-	print_stack(&b);
-	sa(&a);
-	printf("After sorting:\n");
+	sort(&a, &b);
 	print_stack(&a);
-	print_stack(&b);
-	return (0);
+	
 }
 
 void	print_stack(t_stack *a)
 {
-	int	i;
+	int	x;
 
-	i = 0;
-	while (i < a->size)
+	x = 0;
+	while (x < a->size)
 	{
-		printf("%d\n", a->array[i]);
-		i++;
+		ft_printf("%d ", a->array[x]);
+		x++;
 	}
 }

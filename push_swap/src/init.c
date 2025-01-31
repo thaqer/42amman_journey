@@ -17,7 +17,6 @@ void	init_stack_a(t_stack *a, int size)
 	a->size = size;
 	a->index = size - 1;
 	a->array = malloc(sizeof(int) * a->size);
-	printf("Initialized stack a with size %d\n", a->size);
 }
 
 void	init_stack_b(t_stack *b, int size)
@@ -25,56 +24,61 @@ void	init_stack_b(t_stack *b, int size)
 	b->size = 0;
 	b->index = -1;
 	b->array = malloc(sizeof(int) * size);
-	printf("Initialized stack b with size %d\n", size);
 }
 
 void	init_arguments(t_stack *a, int argc, char **argv)
 {
-	int	i;
+	int	x;
 
-	i = 1;
-	while (i < argc)
+	x = 0;
+	while (x < argc - 1)
 	{
-		a->array[a->size - 1 - a->index] = ft_atoi(argv[i]);
+		a->array[a->size - 1 - a->index] = ft_atoi(argv[x + 1]);
 		a->index--;
-		i++;
+		x++;
 	}
+	a->index = a->size - 1;
 }
 
 void	parse_arguments(t_stack *a, char *arg)
 {
 	char	**numbers;
-	int		i;
+	int		x;
+	int		count;
 
 	numbers = ft_split(arg, ' ');
-	i = 0;
-	while (numbers[i])
+	count = 0;
+	while (numbers[count])
+		count++;
+	x = 0;
+	while (x < count)
 	{
-		a->array[a->size - 1 - a->index] = ft_atoi(numbers[i]);
+		a->array[a->size - 1 - a->index] = ft_atoi(numbers[x]);
 		a->index--;
-		i++;
+		x++;
 	}
-	i = 0;
-	while (numbers[i])
-		free(numbers[i++]);
+	a->index = a->size - 1;
+	x = 0;
+	while (numbers[x])
+		free(numbers[x++]);
 	free(numbers);
 }
 
 int	count_arguments(char *arg)
 {
 	int		count;
-	int		i;
+	int		x;
 	char	**numbers;
 
 	count = 0;
-	i = 0;
+	x = 0;
 	numbers = ft_split(arg, ' ');
 	while (numbers[count])
 		count++;
-	while (numbers[i])
+	while (numbers[x])
 	{
-		free(numbers[i]);
-		i++;
+		free(numbers[x]);
+		x++;
 	}
 	free(numbers);
 	return (count);

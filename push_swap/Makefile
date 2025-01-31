@@ -9,6 +9,7 @@ SRCS = src/main.c\
 	src/operations.c\
 	src/init.c\
 	src/radix_sort.c\
+	src/sort.c\
 
 LIBFT = libft/libft.a
 PRINTF = printf/libftprintf.a
