@@ -27,12 +27,12 @@ int	main(int argc, char **argv)
 	if (!b)
 		error_program(a, b);
 	init_arguments(a, argc, argv);
-	print_stack(a);
+	// print_stack(a);
 	// if (is_sorted(a))
 	// 	exit_program(a, b);
 	sort(a, b);
-	ft_printf("\n");
-	print_stack(a);
+	// ft_printf("\n");
+	// print_stack(a);
 	exit_program(a, b);
 }
 
@@ -44,6 +44,13 @@ void	print_stack(t_stack *a)
 	while (temp)
 	{
 		ft_printf("%d ", temp->value);
+		temp = temp->next;
+	}
+	ft_printf("\n");
+	temp = a->top;
+	while (temp)
+	{
+		ft_printf("%d ", temp->index);
 		temp = temp->next;
 	}
 }

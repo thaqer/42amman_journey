@@ -23,6 +23,7 @@
 typedef struct s_node
 {
 	int				value;
+	int				temp;
 	int				index;
 	struct s_node	*next;
 }					t_node;
@@ -42,6 +43,7 @@ void				radix_sort(t_stack *a, t_stack *b);
 void				do_radix_sort(t_stack *a, t_stack *b, int max_bits);
 void				give_index(t_node *a);
 void				switch_values(t_node *a);
+void				restore_values(t_node *a);
 void				sort_2(t_stack *a);
 void				sort_3(t_stack *a);
 void				sort_4(t_stack *a, t_stack *b);

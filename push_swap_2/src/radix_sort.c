@@ -18,6 +18,8 @@ void radix_sort(t_stack *a, t_stack *b)
 
 	give_index(a->top);
 	switch_values(a->top);
+	// ft_printf("\n");
+	// print_stack(a);
 	max_bits = find_max_bits(a->top);
 	do_radix_sort(a, b, max_bits);
 
@@ -25,43 +27,41 @@ void radix_sort(t_stack *a, t_stack *b)
 
 int	find_max_bits(t_node *a)
 {
-	int max;
-	int bits;
+	int	max;
+	t_node	*current;
 
-	max = a->index;
-	while (a)
+	current = a;
+	max = 0;
+	while (current)
 	{
-		if (a->index > max)
-			max = a->index;
-		a = a->next;
+		if (current->value > max)
+			max = current->value;
+		current = current->next;
 	}
-	bits = 0;
-	while (max)
-	{
-		max /= 10;
-		bits++;
-	}
-	return (bits);
+	return (max);
 }
 
 void	give_index(t_node *a)
 {
 	t_node	*temp;
+	t_node	*temp2;
 	int		index;
 
 	temp = a;
-	while (temp)
+	temp2 = a;
+	while (temp2)
 	{
 		index = 0;
-		while (a)
+		temp = a;
+		while (temp)
 		{
-			if (temp->value > a->value)
+			if (temp->value < temp2->value)
 				index++;
-			a = a->next;
+			temp = temp->next;
 		}
-		temp->index = index;
-		temp = temp->next;
-		a = temp;
+		temp2->index = index;
+		temp2 = temp2->next;
+
 	}
 	
 }
