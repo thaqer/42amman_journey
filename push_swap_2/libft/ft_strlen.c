@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   radix_sort.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbaniatt <tbaniatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-30 19:13:00 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025-01-30 19:13:00 by tbaniatt         ###   ########.fr       */
+/*   Created: 2024/08/26 14:54:14 by tbaniatt          #+#    #+#             */
+/*   Updated: 2024/09/03 09:02:55 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-void	radix_sort(t_stack *a, t_stack *b)
+size_t	ft_strlen(const char *s)
 {
-	
+	size_t	x;
+
+	x = 0;
+	while (*s != '\0')
+	{
+		x++;
+		s++;
+	}
+	return (x);
 }

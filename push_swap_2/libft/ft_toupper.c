@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   radix_sort.c                                       :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbaniatt <tbaniatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-30 19:13:00 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025-01-30 19:13:00 by tbaniatt         ###   ########.fr       */
+/*   Created: 2024/08/26 19:09:42 by tbaniatt          #+#    #+#             */
+/*   Updated: 2024/09/01 08:18:09 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
-
-void	radix_sort(t_stack *a, t_stack *b)
+int	ft_toupper(int c)
 {
-	
+	if (c > 96 && c < 123)
+		return (c - 32);
+	else
+		return (c);
 }

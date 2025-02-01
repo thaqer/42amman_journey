@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   radix_sort.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbaniatt <tbaniatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-30 19:13:00 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025-01-30 19:13:00 by tbaniatt         ###   ########.fr       */
+/*   Created: 2024/08/27 17:44:49 by tbaniatt          #+#    #+#             */
+/*   Updated: 2024/09/04 19:52:43 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include <stdio.h>
 
-void	radix_sort(t_stack *a, t_stack *b)
+char	*ft_strchr(const char *s, int c)
 {
-	
+	unsigned char	uc;
+	int				x;
+
+	uc = (unsigned char)c;
+	x = 0;
+	while (s[x] != '\0')
+	{
+		if (s[x] == uc)
+			return ((char *)s + x);
+		x++;
+	}
+	if (uc != '\0')
+		return (NULL);
+	return ((char *)s + x);
 }

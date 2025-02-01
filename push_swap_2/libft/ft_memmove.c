@@ -1,18 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   radix_sort.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbaniatt <tbaniatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-30 19:13:00 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025-01-30 19:13:00 by tbaniatt         ###   ########.fr       */
+/*   Created: 2024/08/27 10:16:26 by tbaniatt          #+#    #+#             */
+/*   Updated: 2024/09/04 19:14:47 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-void	radix_sort(t_stack *a, t_stack *b)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	
+	const unsigned char	*a;
+	unsigned char		*b;
+
+	a = (const unsigned char *)src;
+	b = (unsigned char *)dest;
+	if (!a && !b)
+		return (NULL);
+	if (a > b)
+	{
+		while (n--)
+			*b++ = *a++;
+	}
+	else
+	{
+		b += n;
+		a += n;
+		while (n--)
+			*--b = *--a;
+	}
+	return (dest);
 }

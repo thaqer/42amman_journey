@@ -14,40 +14,36 @@
 
 int	main(int argc, char **argv)
 {
-	t_stack	a;
-	t_stack	b;
-	int		count;
+	t_stack	*a;
+	t_stack	*b;
 
+	(void)argv;
 	if (argc < 2)
 		return (0);
-	if (argc == 2)
-	{
-		count = count_arguments(argv[1]);
-		init_stack_a(&a, count);
-		init_stack_b(&b, count);
-		parse_arguments(&a, argv[1]);
-	}
-	else
-	{
-		init_stack_a(&a, argc - 1);
-		init_stack_b(&b, argc - 1);
-		init_arguments(&a, argc, argv);
-	}
-	print_stack(&a);
-	sort(&a, &b);
+	a = init_stack();
+	if (!a)
+		error_program(a, NULL);
+	b = init_stack();
+	if (!b)
+		error_program(a, b);
+	init_arguments(a, argc, argv);
+	print_stack(a);
+	// if (is_sorted(a))
+	// 	exit_program(a, b);
+	sort(a, b);
 	ft_printf("\n");
-	print_stack(&a);
-	exit_program(&a, &b);
+	print_stack(a);
+	exit_program(a, b);
 }
 
 void	print_stack(t_stack *a)
 {
-	int	x;
+	t_node	*temp;
 
-	x = 0;
-	while (x < a->size)
+	temp = a->top;
+	while (temp)
 	{
-		ft_printf("%d ", a->array[x]);
-		x++;
+		ft_printf("%d ", temp->value);
+		temp = temp->next;
 	}
 }

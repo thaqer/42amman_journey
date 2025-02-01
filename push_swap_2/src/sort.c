@@ -30,7 +30,7 @@ void	sort(t_stack *a, t_stack *b)
 
 void	sort_2(t_stack *a)
 {
-	if (a->array[a->size - 1] < a->array[a->size - 2])
+	if (a->top->value > a->top->next->value)
 		sa(a);
 }
 
@@ -40,38 +40,40 @@ void	sort_3(t_stack *a)
 	int	second;
 	int	third;
 
-	third = a->array[a->size - 1];
-	second = a->array[a->size - 2];
-	first = a->array[a->size - 3];
+	first = a->top->value;
+	second = a->top->next->value;
+	third = a->top->next->next->value;
 	if (first > second && second < third && first < third)
-	{
-		ra(a);
 		sa(a);
-	}
 	else if (first > second && second > third && first > third)
 	{
-		sa(a);
 		ra(a);
+		sa(a);
 	}
 	else if (first > second && second < third && first > third)
 		ra(a);
 	else if (first < second && second > third && first < third)
+	{
+		rra(a);
 		sa(a);
+	}
 	else if (first < second && second > third && first > third)
 		rra(a);
+	else
+		ft_printf("no need to sort\n");
 }
 
 void	sort_4(t_stack *a, t_stack *b)
 {
-	push_max(a, b);
+	push_min(a, b);
 	sort_3(a);
 	pa(a, b);
 }
 
 void	sort_5(t_stack *a, t_stack *b)
 {
-	push_max(a, b);
-	push_max(a, b);
+	push_min(a, b);
+	push_min(a, b);
 	sort_3(a);
 	pa(a, b);
 	pa(a, b);

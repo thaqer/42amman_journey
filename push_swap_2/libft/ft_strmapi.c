@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   radix_sort.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbaniatt <tbaniatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-30 19:13:00 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025-01-30 19:13:00 by tbaniatt         ###   ########.fr       */
+/*   Created: 2024/09/02 11:25:17 by tbaniatt          #+#    #+#             */
+/*   Updated: 2024/09/03 09:04:18 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-void	radix_sort(t_stack *a, t_stack *b)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	
+	char	*c;
+	size_t	len;
+	size_t	i;
+
+	if (!s || !f)
+		return (NULL);
+	len = ft_strlen(s);
+	c = ft_calloc(len + 1, sizeof(char));
+	if (!c)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		c[i] = f(i, s[i]);
+		i++;
+	}
+	return (c);
 }

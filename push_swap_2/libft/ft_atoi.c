@@ -1,18 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   radix_sort.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbaniatt <tbaniatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-30 19:13:00 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025-01-30 19:13:00 by tbaniatt         ###   ########.fr       */
+/*   Created: 2024/08/29 17:05:16 by tbaniatt          #+#    #+#             */
+/*   Updated: 2024/09/04 18:36:57 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-void	radix_sort(t_stack *a, t_stack *b)
+int	ft_atoi(const char *nptr)
 {
-	
+	int	x;
+	int	ne;
+	int	n;
+
+	x = 0;
+	n = 0;
+	ne = 1;
+	while (nptr[x] == 32 || (nptr[x] >= 9 && nptr[x] <= 13))
+		x++;
+	if (nptr[x] == '+' || nptr[x] == '-')
+	{
+		if (nptr[x] == '-')
+			ne = ne * -1;
+		x++;
+	}
+	while (nptr[x] >= '0' && nptr[x] <= '9')
+	{
+		n = (n * 10) + (nptr[x] - '0');
+		x++;
+	}
+	return (n * ne);
 }

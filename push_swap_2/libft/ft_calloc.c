@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   radix_sort.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbaniatt <tbaniatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-30 19:13:00 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025-01-30 19:13:00 by tbaniatt         ###   ########.fr       */
+/*   Created: 2024/09/01 08:16:15 by tbaniatt          #+#    #+#             */
+/*   Updated: 2024/09/03 17:01:50 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "libft.h"
 
-void	radix_sort(t_stack *a, t_stack *b)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	
+	char	*str;
+
+	if (nmemb == 0 || size == 0)
+		return (malloc(0));
+	str = (char *)malloc(nmemb * size);
+	if (str == NULL)
+	{
+		free(str);
+		return (NULL);
+	}
+	ft_memset(str, 0, nmemb * size);
+	return ((void *)str);
 }
