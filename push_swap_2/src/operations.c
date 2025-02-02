@@ -14,13 +14,14 @@
 
 void	sa(t_stack *a)
 {
-	int	tmp;
+	t_node	*temp;
 
 	if (a->size < 2)
 		return ;
-	tmp = a->top->value;
-	a->top->value = a->top->next->value;
-	a->top->next->value = tmp;
+	temp = a->top;
+	a->top = temp->next;
+	temp->next = a->top->next;
+	a->top->next = temp;
 	write(1, "sa\n", 3);
 }
 
@@ -40,7 +41,7 @@ void	pb(t_stack *a, t_stack *b)
 {
 	int	tmp;
 
-	if (a->size == 0)
+	if (a->size == 0 || !a)
 		return ;
 	tmp = pull_stack(a);
 	push_stack(b, tmp);
@@ -51,7 +52,7 @@ void	pa(t_stack *a, t_stack *b)
 {
 	int	tmp;
 
-	if (b->size == 0)
+	if (b->size == 0 || !b)
 		return ;
 	tmp = pull_stack(b);
 	push_stack(a, tmp);
@@ -60,43 +61,34 @@ void	pa(t_stack *a, t_stack *b)
 
 void	ra(t_stack *a)
 {
-	int	tmp;
-	t_node *temp;
-	t_node *new_node;
+	t_node	*temp;
+	t_node	*last;
 
 	if (a->size < 2)
 		return ;
-	tmp = pull_stack(a);
 	temp = a->top;
-	while (temp->next)
-		temp = temp->next;
-	new_node = malloc(sizeof(t_node));
-	if (!new_node)
-		error_program(a, NULL);
-	new_node->value = tmp;
-	new_node->next = NULL;
-	temp->next = new_node;
-	a->size++;
+	a->top = temp->next;
+	temp->next = NULL;
+	last = a->top;
+	while (last->next)
+		last = last->next;
+	last->next = temp;
 	write(1, "ra\n", 3);
 }
 
 void	rra(t_stack *a)
 {
-	int	tmp;
-	t_node *temp;
-	t_node *prev;
+	t_node	*temp;
+	t_node	*temp2;
 
 	if (a->size < 2)
 		return ;
 	temp = a->top;
-	while (temp->next)
-	{
-		prev = temp;
+	while (temp->next->next)
 		temp = temp->next;
-	}
-	tmp = temp->value;
-	free(temp);
-	prev->next = NULL;
-	push_stack(a, tmp);
+	temp2 = temp->next;
+	temp->next = NULL;
+	temp2->next = a->top;
+	a->top = temp2;
 	write(1, "rra\n", 4);
 }

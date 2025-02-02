@@ -20,25 +20,47 @@ void radix_sort(t_stack *a, t_stack *b)
 	switch_values(a->top);
 	// ft_printf("\n");
 	// print_stack(a);
+	a->top->temp = stack_size(a);
 	max_bits = find_max_bits(a->top);
 	do_radix_sort(a, b, max_bits);
 
 }
 
+int	stack_size(t_stack *a)
+{
+	t_node	*temp;
+	int		size;
+
+	size = 0;
+	temp = a->top;
+	while (temp)
+	{
+		size++;
+		temp = temp->next;
+	}
+	return (size);
+}
+
 int	find_max_bits(t_node *a)
 {
+	t_node	*temp;
 	int	max;
-	t_node	*current;
+	int x;
 
-	current = a;
+	if (!a)
+		return (0);
+	temp = a;
 	max = 0;
-	while (current)
+	x = 0;
+	while (temp)
 	{
-		if (current->value > max)
-			max = current->value;
-		current = current->next;
+		if (temp->value > max)
+			max = temp->value;
+		temp = temp->next;
 	}
-	return (max);
+	while (max >> x)
+		x++;
+	return (x);
 }
 
 void	give_index(t_node *a)
@@ -80,25 +102,26 @@ void	do_radix_sort(t_stack *a, t_stack *b, int max_bits)
 	t_node	*top;
 	int	x;
 	int	y;
+	int	size;
 
 	x = 0;
+	size = stack_size(a);
 	while (x < max_bits)
 	{
 		y = 0;
-		while (y < a->size)
+		while (y < size)
 		{
 			top = a->top;
-			if (((top->value >> x) & 1) == 1)
-				ra(a);
-			else
+			if (((top->value >> x) & 1) != 1)
 				pb(a, b);
+			else
+				ra(a);
 			y++;
 		}
-		while (b->top)
+		while (stack_size(b) > 0)
 			pa(a, b);
 		if (is_sorted(a))
 			break ;
 		x++;
 	}
 }
-

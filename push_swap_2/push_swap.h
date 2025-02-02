@@ -41,9 +41,9 @@ void				push_stack(t_stack *stack, int value);
 void				sort(t_stack *a, t_stack *b);
 void				radix_sort(t_stack *a, t_stack *b);
 void				do_radix_sort(t_stack *a, t_stack *b, int max_bits);
+void				do_radix_sort2(t_stack *a);
 void				give_index(t_node *a);
 void				switch_values(t_node *a);
-void				restore_values(t_node *a);
 void				sort_2(t_stack *a);
 void				sort_3(t_stack *a);
 void				sort_4(t_stack *a, t_stack *b);
@@ -64,5 +64,6 @@ int					count_arguments(char *arg);
 int					pull_stack(t_stack *stack);
 int					find_max(t_stack *a);
 int					find_min(t_stack *a);
+int					stack_size(t_stack *a);
 
 #endif

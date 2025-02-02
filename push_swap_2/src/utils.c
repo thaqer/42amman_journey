@@ -42,6 +42,8 @@ int	is_sorted(t_stack *a)
 {
 	t_node	*temp;
 
+	if (!a || !a->top)
+		return (1);
 	temp = a->top;
 	while (temp->next)
 	{
@@ -55,17 +57,21 @@ int	is_sorted(t_stack *a)
 int	find_max(t_stack *a)
 {
 	int max;
+	int max_bit;
 	t_node *current;
 
 	current = a->top;
 	max = current->value;
+	max_bit = 0;
 	while (current)
 	{
 		if (current->value > max)
 			max = current->value;
 		current = current->next;
 	}
-	return (max);
+	while ((max >> max_bit) != 0)
+		max_bit++;
+	return (max_bit);
 }
 
 int find_min(t_stack *a)
