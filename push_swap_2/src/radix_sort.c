@@ -12,20 +12,6 @@
 
 #include "../push_swap.h"
 
-void radix_sort(t_stack *a, t_stack *b)
-{
-	int max_bits;
-
-	give_index(a->top);
-	switch_values(a->top);
-	// ft_printf("\n");
-	// print_stack(a);
-	a->top->temp = stack_size(a);
-	max_bits = find_max_bits(a->top);
-	do_radix_sort(a, b, max_bits);
-
-}
-
 int	stack_size(t_stack *a)
 {
 	t_node	*temp;
@@ -44,8 +30,8 @@ int	stack_size(t_stack *a)
 int	find_max_bits(t_node *a)
 {
 	t_node	*temp;
-	int	max;
-	int x;
+	int		max;
+	int		x;
 
 	if (!a)
 		return (0);
@@ -83,11 +69,18 @@ void	give_index(t_node *a)
 		}
 		temp2->index = index;
 		temp2 = temp2->next;
+	}
+}
 
+void	save_values(t_node *a)
+{
+	while (a)
+	{
+		a->temp = a->value;
+		a = a->next;
 	}
 	
 }
-
 void	switch_values(t_node *a)
 {
 	while (a)
@@ -100,9 +93,9 @@ void	switch_values(t_node *a)
 void	do_radix_sort(t_stack *a, t_stack *b, int max_bits)
 {
 	t_node	*top;
-	int	x;
-	int	y;
-	int	size;
+	int		x;
+	int		y;
+	int		size;
 
 	x = 0;
 	size = stack_size(a);

@@ -14,7 +14,9 @@
 
 void	push_stack(t_stack *stack, int value)
 {
-	t_node *new_node = malloc(sizeof(t_node));
+	t_node	*new_node;
+
+	new_node = malloc(sizeof(t_node));
 	if (!new_node)
 		error_program(stack, NULL);
 	new_node->value = value;
@@ -25,8 +27,8 @@ void	push_stack(t_stack *stack, int value)
 
 int	pull_stack(t_stack *stack)
 {
-	int	tmp;
-	t_node *temp;
+	int		tmp;
+	t_node	*temp;
 
 	if (stack->size == 0)
 		error_program(stack, NULL);
@@ -54,30 +56,10 @@ int	is_sorted(t_stack *a)
 	return (1);
 }
 
-int	find_max(t_stack *a)
+int	find_min(t_stack *a)
 {
-	int max;
-	int max_bit;
-	t_node *current;
-
-	current = a->top;
-	max = current->value;
-	max_bit = 0;
-	while (current)
-	{
-		if (current->value > max)
-			max = current->value;
-		current = current->next;
-	}
-	while ((max >> max_bit) != 0)
-		max_bit++;
-	return (max_bit);
-}
-
-int find_min(t_stack *a)
-{
-	int min;
-	t_node *current;
+	int		min;
+	t_node	*current;
 
 	current = a->top;
 	min = current->value;
@@ -90,22 +72,12 @@ int find_min(t_stack *a)
 	return (min);
 }
 
-
-void push_min(t_stack *a, t_stack *b)
+void	push_min(t_stack *a, t_stack *b)
 {
-	int min;
+	int	min;
 
 	min = find_min(a);
 	while (a->top->value != min)
-		ra(a);
-	pb(a, b);
-}
-void	push_max(t_stack *a, t_stack *b)
-{
-	int	max;
-
-	max = find_max(a);
-	while (a->top->value != max)
-		ra(a);
+		rra(a);
 	pb(a, b);
 }

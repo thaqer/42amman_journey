@@ -36,3 +36,9 @@ int	ft_atoi(const char *nptr)
 	}
 	return (n * ne);
 }
+
+void	ft_error(char *str)
+{
+	write(2, str, ft_strlen(str));
+	exit(1);
+}

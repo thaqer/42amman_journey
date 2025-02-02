@@ -11,6 +11,7 @@ SRCS = src/main.c\
 	src/radix_sort.c\
 	src/sort.c\
 	src/end_program.c\
+	src/check.c\
 
 LIBFT = libft/libft.a
 PRINTF = printf/libftprintf.a

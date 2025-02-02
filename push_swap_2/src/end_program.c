@@ -14,7 +14,7 @@
 
 void	free_stack(t_stack *stack)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	while (stack->top)
 	{
@@ -34,7 +34,7 @@ void	exit_program(t_stack *a, t_stack *b)
 
 void	error_program(t_stack *a, t_stack *b)
 {
-	ft_printf("Error\n");
+	write(2, "Error\n", 6);
 	if (a)
 		free_stack(a);
 	if (b)

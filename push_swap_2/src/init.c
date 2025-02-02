@@ -26,7 +26,8 @@ t_stack	*init_stack(void)
 
 void	init_arguments(t_stack *a, int argc, char **argv)
 {
-	int	x;
+	int		x;
+	t_node	*new_node;
 
 	x = 1;
 	if (argc == 2)
@@ -38,9 +39,9 @@ void	init_arguments(t_stack *a, int argc, char **argv)
 	{
 		a->size = argc - 1;
 		x = a->size;
-		while ( x > 0)
+		while (x > 0)
 		{
-			t_node *new_node = malloc(sizeof(t_node));
+			new_node = malloc(sizeof(t_node));
 			if (!new_node)
 				error_program(a, NULL);
 			new_node->value = ft_atoi(argv[x]);
@@ -55,11 +56,13 @@ void	parse_arguments(t_stack *a, char *arg)
 {
 	char	**numbers;
 	int		x;
-		numbers = ft_split(arg, ' ');
+	t_node	*new_node;
+
+	numbers = ft_split(arg, ' ');
 	x = a->size - 1;
 	while (x >= 0)
 	{
-		t_node *new_node = malloc(sizeof(t_node));
+		new_node = malloc(sizeof(t_node));
 		if (!new_node)
 			error_program(a, NULL);
 		new_node->value = ft_atoi(numbers[x]);
@@ -91,36 +94,4 @@ int	count_arguments(char *arg)
 	}
 	free(numbers);
 	return (count);
-}
-
-void	repetition(t_stack *a)
-{
-	t_node	*temp;
-	t_node	*temp2;
-
-	temp = a->top;
-	while (temp)
-	{
-		temp2 = temp->next;
-		while (temp2)
-		{
-			if (temp->value == temp2->value)
-				error_program(a, NULL);
-			temp2 = temp2->next;
-		}
-		temp = temp->next;
-	}
-}
-
-void	is_number(t_stack *a)
-{
-	t_node	*temp;
-
-	temp = a->top;
-	while (temp)
-	{
-		if (temp->value < INT_MIN || temp->value > INT_MAX)
-			error_program(a, NULL);
-		temp = temp->next;
-	}
 }

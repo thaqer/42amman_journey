@@ -73,8 +73,6 @@ void	sort_4(t_stack *a, t_stack *b)
 void	sort_5(t_stack *a, t_stack *b)
 {
 	push_min(a, b);
-	push_min(a, b);
-	sort_3(a);
-	pa(a, b);
+	sort_4(a, b);
 	pa(a, b);
 }

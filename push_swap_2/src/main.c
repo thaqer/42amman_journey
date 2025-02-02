@@ -27,9 +27,20 @@ int	main(int argc, char **argv)
 	if (!b)
 		error_program(a, b);
 	init_arguments(a, argc, argv);
+	check_arguments(a);
 	sort(a, b);
-	print_stack(a);
 	exit_program(a, b);
+}
+
+void	radix_sort(t_stack *a, t_stack *b)
+{
+	int	max_bits;
+
+	give_index(a->top);
+	switch_values(a->top);
+	a->top->temp = stack_size(a);
+	max_bits = find_max_bits(a->top);
+	do_radix_sort(a, b, max_bits);
 }
 
 void	print_stack(t_stack *a)
