@@ -5,15 +5,19 @@ NAME = libftprintf.a
 
 SRCS = ft_printf.c ft_mod.c ft_putpoin.c ft_putcharpf.c ft_putpoin.c ft_putstrpf.c ft_putnbr_base.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:%.c=objs/%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
+objs/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(OBJS)
+	rm -rf objs
 
 fclean: clean
 	rm -f $(NAME)

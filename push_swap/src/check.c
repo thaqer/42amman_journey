@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-void	repetition(t_stack *a)
+void	repetition(t_stack *a, t_stack *b)
 {
 	t_node	*temp;
 	t_node	*temp2;
@@ -24,14 +24,14 @@ void	repetition(t_stack *a)
 		while (temp2)
 		{
 			if (temp->value == temp2->value)
-				error_program(a, NULL);
+				error_program(a, b);
 			temp2 = temp2->next;
 		}
 		temp = temp->next;
 	}
 }
 
-void	is_int(t_stack *a)
+void	is_int(t_stack *a, t_stack *b)
 {
 	t_node	*temp;
 
@@ -39,13 +39,13 @@ void	is_int(t_stack *a)
 	while (temp)
 	{
 		if (temp->value > INT_MAX || temp->value < INT_MIN)
-			error_program(a, NULL);
+			error_program(a, b);
 		temp = temp->next;
 	}
 }
 
-void	check_arguments(t_stack *a)
+void	check_arguments(t_stack *a, t_stack *b)
 {
-	repetition(a);
-	is_int(a);
+	repetition(a, b);
+	is_int(a, b);
 }

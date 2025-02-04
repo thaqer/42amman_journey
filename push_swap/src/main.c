@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	if (!b)
 		error_program(a, b);
 	init_arguments(a, b, argc, argv);
-	check_arguments(a);
+	check_arguments(a, b);
 	sort(a, b);
 	exit_program(a, b);
 }
@@ -57,12 +57,11 @@ void	print_stack(t_stack *a)
 	temp = a->top;
 }
 
-
-long	ft_atol(const char *nptr, t_stack *a, t_stack *b)
+long	ft_atol(const char *nptr)
 {
-	int	x;
-	int	ne;
 	long	n;
+	int		x;
+	int		ne;
 
 	x = 0;
 	n = 0;
@@ -80,7 +79,5 @@ long	ft_atol(const char *nptr, t_stack *a, t_stack *b)
 		n = (n * 10) + (nptr[x] - '0');
 		x++;
 	}
-	if (n > INT_MAX || n < INT_MIN)
-		error_program(a, b);
 	return (n * ne);
 }

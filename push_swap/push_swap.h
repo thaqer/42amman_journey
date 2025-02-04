@@ -13,8 +13,8 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../libft/libft.h"
-# include "../push_swap/printf/ft_printf.h"
+# include "libft/libft.h"
+# include "printf/ft_printf.h"
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -31,15 +31,17 @@ typedef struct s_node
 
 typedef struct s_stack
 {
-	t_node	*top;
-	int		size;
-}		t_stack;
+	t_node			*top;
+	int				size;
+}					t_stack;
 
 t_stack				*init_stack(void);
 void				parse_arguments(t_stack *a, t_stack *b, char *arg);
-void				init_arguments(t_stack *a, t_stack *b, int argc, char **argv);
+void				init_arguments(t_stack *a, t_stack *b, int argc,
+						char **argv);
+void				repetition(t_stack *a, t_stack *b);
 void				is_valid(char *arg, t_stack *a, t_stack *b);
-void				check_arguments(t_stack *a);
+void				check_arguments(t_stack *a, t_stack *b);
 void				print_stack(t_stack *a);
 void				push_stack(t_stack *stack, int value);
 void				sort(t_stack *a, t_stack *b);
@@ -59,13 +61,13 @@ void				ra(t_stack *a);
 void				rra(t_stack *a);
 void				exit_program(t_stack *a, t_stack *b);
 void				error_program(t_stack *a, t_stack *b);
-void				is_int(t_stack *a);
+void				is_int(t_stack *a, t_stack *b);
 int					find_max_bits(t_node *a);
 int					is_sorted(t_stack *a);
 int					count_arguments(char *arg);
 int					pull_stack(t_stack *stack);
 int					find_min(t_stack *a);
 int					stack_size(t_stack *a);
-long					ft_atol(const char *nptr, t_stack *a, t_stack *b);
+long				ft_atol(const char *nptr);
 
 #endif

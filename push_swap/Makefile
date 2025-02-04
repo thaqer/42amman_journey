@@ -35,14 +35,14 @@ objs/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf objs
 	make -C libft clean
 	make -C printf clean
+	rm -rf objs
 
 fclean: clean
-	rm -f $(NAME)
 	make -C libft fclean
 	make -C printf fclean
+	rm -f $(NAME)
 
 re: fclean all
 
