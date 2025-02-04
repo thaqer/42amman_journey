@@ -11,6 +11,7 @@ SRCS = src/main.c\
 	src/radix_sort.c\
 	src/sort.c\
 	src/end_program.c\
+	src/check.c\
 
 LIBFT = libft/libft.a
 PRINTF = printf/libftprintf.a
@@ -19,14 +20,15 @@ OBJS = $(SRCS:src/%.c=objs/%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(PRINTF)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) -o $(NAME)
-
 $(LIBFT):
 	make -C libft
 
 $(PRINTF):
 	make -C printf
+
+$(NAME): $(OBJS) $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) -o $(NAME)
+
 
 objs/%.o: src/%.c
 	@mkdir -p $(dir $@)

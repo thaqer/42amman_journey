@@ -14,40 +14,73 @@
 
 int	main(int argc, char **argv)
 {
-	t_stack	a;
-	t_stack	b;
-	int		count;
+	t_stack	*a;
+	t_stack	*b;
 
+	(void)argv;
 	if (argc < 2)
 		return (0);
-	if (argc == 2)
-	{
-		count = count_arguments(argv[1]);
-		init_stack_a(&a, count);
-		init_stack_b(&b, count);
-		parse_arguments(&a, argv[1]);
-	}
-	else
-	{
-		init_stack_a(&a, argc - 1);
-		init_stack_b(&b, argc - 1);
-		init_arguments(&a, argc, argv);
-	}
-	print_stack(&a);
-	sort(&a, &b);
-	ft_printf("\n");
-	print_stack(&a);
-	exit_program(&a, &b);
+	a = init_stack();
+	if (!a)
+		error_program(a, NULL);
+	b = init_stack();
+	if (!b)
+		error_program(a, b);
+	init_arguments(a, b, argc, argv);
+	check_arguments(a);
+	sort(a, b);
+	exit_program(a, b);
+}
+
+void	radix_sort(t_stack *a, t_stack *b)
+{
+	int	max_bits;
+
+	give_index(a->top);
+	switch_values(a->top);
+	a->top->temp = stack_size(a);
+	max_bits = find_max_bits(a->top);
+	do_radix_sort(a, b, max_bits);
 }
 
 void	print_stack(t_stack *a)
 {
+	t_node	*temp;
+
+	temp = a->top;
+	while (temp)
+	{
+		ft_printf("%d ", temp->value);
+		temp = temp->next;
+	}
+	ft_printf("\n");
+	temp = a->top;
+}
+
+
+long	ft_atol(const char *nptr, t_stack *a, t_stack *b)
+{
 	int	x;
+	int	ne;
+	long	n;
 
 	x = 0;
-	while (x < a->size)
+	n = 0;
+	ne = 1;
+	while (nptr[x] == 32 || (nptr[x] >= 9 && nptr[x] <= 13))
+		x++;
+	if (nptr[x] == '+' || nptr[x] == '-')
 	{
-		ft_printf("%d ", a->array[x]);
+		if (nptr[x] == '-')
+			ne = ne * -1;
 		x++;
 	}
+	while (nptr[x] >= '0' && nptr[x] <= '9')
+	{
+		n = (n * 10) + (nptr[x] - '0');
+		x++;
+	}
+	if (n > INT_MAX || n < INT_MIN)
+		error_program(a, b);
+	return (n * ne);
 }

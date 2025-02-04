@@ -22,48 +22,50 @@
 
 typedef struct s_node
 {
+	int				temp_v;
 	int				value;
+	int				temp;
 	int				index;
 	struct s_node	*next;
 }					t_node;
 
 typedef struct s_stack
 {
-	int				*array;
-	int				index;
-	int				size;
-}					t_stack;
+	t_node	*top;
+	int		size;
+}		t_stack;
 
-void				init_stack_a(t_stack *stack, int size);
-void				init_stack_b(t_stack *stack, int size);
-void				parse_arguments(t_stack *a, char *arg);
-void				init_arguments(t_stack *a, int argc, char **argv);
+t_stack				*init_stack(void);
+void				parse_arguments(t_stack *a, t_stack *b, char *arg);
+void				init_arguments(t_stack *a, t_stack *b, int argc, char **argv);
+void				is_valid(char *arg, t_stack *a, t_stack *b);
+void				check_arguments(t_stack *a);
 void				print_stack(t_stack *a);
 void				push_stack(t_stack *stack, int value);
-void				radix_sort(t_stack *a, t_stack *b);
 void				sort(t_stack *a, t_stack *b);
+void				radix_sort(t_stack *a, t_stack *b);
+void				do_radix_sort(t_stack *a, t_stack *b, int max_bits);
+void				give_index(t_node *a);
+void				switch_values(t_node *a);
 void				sort_2(t_stack *a);
 void				sort_3(t_stack *a);
 void				sort_4(t_stack *a, t_stack *b);
 void				sort_5(t_stack *a, t_stack *b);
 void				push_min(t_stack *a, t_stack *b);
-void				push_max(t_stack *a, t_stack *b);
-void				give_index(t_stack *a);
-void				switch_value_index(t_stack *a, t_stack *b);
-void				radix(t_stack *a, t_stack *b, int max);
-void				counting_sort(t_stack *a, int exp);
 void				sa(t_stack *a);
-void				sb(t_stack *b);
 void				pb(t_stack *a, t_stack *b);
 void				pa(t_stack *a, t_stack *b);
 void				ra(t_stack *a);
 void				rra(t_stack *a);
 void				exit_program(t_stack *a, t_stack *b);
 void				error_program(t_stack *a, t_stack *b);
+void				is_int(t_stack *a);
+int					find_max_bits(t_node *a);
 int					is_sorted(t_stack *a);
 int					count_arguments(char *arg);
 int					pull_stack(t_stack *stack);
-int					find_max(t_stack *a);
 int					find_min(t_stack *a);
+int					stack_size(t_stack *a);
+long					ft_atol(const char *nptr, t_stack *a, t_stack *b);
 
 #endif

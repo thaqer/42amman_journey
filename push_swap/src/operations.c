@@ -14,33 +14,22 @@
 
 void	sa(t_stack *a)
 {
-	int	tmp;
+	t_node	*temp;
 
-	if (a->size < 2 || !a->array)
+	if (a->size < 2)
 		return ;
-	tmp = a->array[a->size - 1];
-	a->array[a->size - 1] = a->array[a->size - 2];
-	a->array[a->size - 2] = tmp;
+	temp = a->top;
+	a->top = temp->next;
+	temp->next = a->top->next;
+	a->top->next = temp;
 	write(1, "sa\n", 3);
-}
-
-void	sb(t_stack *b)
-{
-	int	tmp;
-
-	if (b->size < 2 || !b->array)
-		return ;
-	tmp = b->array[b->size - 1];
-	b->array[b->size - 1] = b->array[b->size - 2];
-	b->array[b->size - 2] = tmp;
-	write(1, "sb\n", 3);
 }
 
 void	pb(t_stack *a, t_stack *b)
 {
 	int	tmp;
 
-	if (a->size == 0 || !a->array)
+	if (a->size == 0 || !a)
 		return ;
 	tmp = pull_stack(a);
 	push_stack(b, tmp);
@@ -51,7 +40,7 @@ void	pa(t_stack *a, t_stack *b)
 {
 	int	tmp;
 
-	if (b->size == 0 || !b->array)
+	if (b->size == 0 || !b)
 		return ;
 	tmp = pull_stack(b);
 	push_stack(a, tmp);
@@ -60,36 +49,83 @@ void	pa(t_stack *a, t_stack *b)
 
 void	ra(t_stack *a)
 {
-	int	tmp;
-	int	x;
+	t_node	*temp;
+	t_node	*last;
 
-	if (a->size < 2 || !a->array)
+	if (a->size < 2)
 		return ;
-	tmp = a->array[0];
-	x = 0;
-	while (x < a->size - 1)
-	{
-		a->array[x] = a->array[x + 1];
-		x++;
-	}
-	a->array[a->size - 1] = tmp;
+	temp = a->top;
+	a->top = temp->next;
+	temp->next = NULL;
+	last = a->top;
+	while (last->next)
+		last = last->next;
+	last->next = temp;
 	write(1, "ra\n", 3);
 }
 
 void	rra(t_stack *a)
 {
-	int	tmp;
-	int	x;
+	t_node	*temp;
+	t_node	*temp2;
 
-	if (a->size < 2 || !a->array)
+	if (a->size < 2)
 		return ;
-	tmp = a->array[a->size - 1];
-	x = a->size - 1;
-	while (x > 0)
-	{
-		a->array[x] = a->array[x - 1];
-		x--;
-	}
-	a->array[0] = tmp;
+	temp = a->top;
+	while (temp->next->next)
+		temp = temp->next;
+	temp2 = temp->next;
+	temp->next = NULL;
+	temp2->next = a->top;
+	a->top = temp2;
 	write(1, "rra\n", 4);
 }
+
+// void	sb(t_stack *b)
+// {
+// 	int	tmp;
+
+// 	if (b->size < 2)
+// 		return ;
+// 	tmp = b->top->value;
+// 	b->top->value = b->top->next->value;
+// 	b->top->next->value = tmp;
+// 	write(1, "sb\n", 3);
+// }
+
+// void	ss(t_stack *a, t_stack *b)
+// {
+// 	t_node	*temp;
+// 	t_node	*temp2;
+
+// 	temp = a->top;
+// 	temp2 = b->top;
+// 	a->top = temp->next;
+// 	temp->next = a->top->next;
+// 	a->top->next = temp;
+// 	b->top = temp2->next;
+// 	temp2->next = b->top->next;
+// 	b->top->next = temp2;
+// 	write(1, "ss\n", 3);
+
+// }
+
+// void	rr(t_stack *a, t_stack *b)
+// {
+// 	t_node	*temp;
+// 	t_node	*temp2;
+// 	t_node	*last;
+
+// 	temp = a->top;
+// 	temp2 = b->top;
+// 	a->top = temp->next;
+// 	temp->next = NULL;
+// 	last = a->top;
+// 	while (last->next)
+// 		last = last->next;
+// 	last->next = temp;
+// 	b->top = temp2->next;
+// 	temp2->next = b->top->next;
+// 	b->top->next = temp2;
+// 	write(1, "rr\n", 3);
+// }

@@ -12,52 +12,79 @@
 
 #include "../push_swap.h"
 
-void	init_stack_a(t_stack *a, int size)
+t_stack	*init_stack(void)
 {
-	a->size = size;
-	a->index = size - 1;
-	a->array = malloc(sizeof(int) * a->size);
+	t_stack	*a;
+
+	a = malloc(sizeof(t_stack));
+	if (!a)
+		error_program(a, NULL);
+	a->top = NULL;
+	a->size = 0;
+	return (a);
 }
 
-void	init_stack_b(t_stack *b, int size)
+void	init_arguments(t_stack *a, t_stack *b, int argc, char **argv)
 {
-	b->size = 0;
-	b->index = -1;
-	b->array = malloc(sizeof(int) * size);
+	int		x;
+	t_node	*new_node;
+
+	x = 1;
+	if (argc == 2)
+	{
+		a->size = count_arguments(argv[1]);
+		parse_arguments(a, b, argv[1]);
+	}
+	else
+	{
+		a->size = argc - 1;
+		x = a->size;
+		while (x > 0)
+		{
+			is_valid(argv[x], a, b);
+			new_node = malloc(sizeof(t_node));
+			if (!new_node)
+				error_program(a, NULL);
+			new_node->value = ft_atol(argv[x], a, b);
+			new_node->next = a->top;
+			a->top = new_node;
+			x--;
+		}
+	}
 }
 
-void	init_arguments(t_stack *a, int argc, char **argv)
+void	is_valid(char *arg, t_stack *a, t_stack *b)
 {
 	int	x;
 
 	x = 0;
-	while (x < argc - 1)
+	while (arg[x])
 	{
-		a->array[a->size - 1 - a->index] = ft_atoi(argv[x + 1]);
-		a->index--;
+		if (!ft_isdigit(arg[x]) && arg[x] != ' ' && arg[x] != '-')
+			error_program(a, b);
 		x++;
 	}
-	a->index = a->size - 1;
 }
 
-void	parse_arguments(t_stack *a, char *arg)
+void	parse_arguments(t_stack *a, t_stack *b, char *arg)
 {
 	char	**numbers;
 	int		x;
-	int		count;
+	t_node	*new_node;
 
 	numbers = ft_split(arg, ' ');
-	count = 0;
-	while (numbers[count])
-		count++;
-	x = 0;
-	while (x < count)
+	x = a->size - 1;
+	while (x >= 0)
 	{
-		a->array[a->size - 1 - a->index] = ft_atoi(numbers[x]);
-		a->index--;
-		x++;
+		is_valid(numbers[x], a, b);
+		new_node = malloc(sizeof(t_node));
+		if (!new_node)
+			error_program(a, NULL);
+		new_node->value = ft_atol(arg, a, b);
+		new_node->next = a->top;
+		a->top = new_node;
+		x--;
 	}
-	a->index = a->size - 1;
 	x = 0;
 	while (numbers[x])
 		free(numbers[x++]);
