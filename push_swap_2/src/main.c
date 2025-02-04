@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	b = init_stack();
 	if (!b)
 		error_program(a, b);
-	init_arguments(a, argc, argv);
+	init_arguments(a, b, argc, argv);
 	check_arguments(a);
 	sort(a, b);
 	exit_program(a, b);
@@ -55,4 +55,32 @@ void	print_stack(t_stack *a)
 	}
 	ft_printf("\n");
 	temp = a->top;
+}
+
+
+long	ft_atol(const char *nptr, t_stack *a, t_stack *b)
+{
+	int	x;
+	int	ne;
+	long	n;
+
+	x = 0;
+	n = 0;
+	ne = 1;
+	while (nptr[x] == 32 || (nptr[x] >= 9 && nptr[x] <= 13))
+		x++;
+	if (nptr[x] == '+' || nptr[x] == '-')
+	{
+		if (nptr[x] == '-')
+			ne = ne * -1;
+		x++;
+	}
+	while (nptr[x] >= '0' && nptr[x] <= '9')
+	{
+		n = (n * 10) + (nptr[x] - '0');
+		x++;
+	}
+	if (n > INT_MAX || n < INT_MIN)
+		error_program(a, b);
+	return (n * ne);
 }

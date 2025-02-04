@@ -72,19 +72,11 @@ void	give_index(t_node *a)
 	}
 }
 
-void	save_values(t_node *a)
-{
-	while (a)
-	{
-		a->temp = a->value;
-		a = a->next;
-	}
-	
-}
 void	switch_values(t_node *a)
 {
 	while (a)
 	{
+		a->temp_v = a->value;
 		a->value = a->index;
 		a = a->next;
 	}

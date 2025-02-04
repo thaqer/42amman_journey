@@ -44,7 +44,7 @@ void	validate_path(t_map *map)
 	int		x;
 	char	**map_copy;
 
-	find_player(map);
+	// find_player(map);
 	map_copy = malloc(sizeof(char *) * map->rows);
 	if (!map_copy)
 		exit_game_error(map, "Memory allocation failed");

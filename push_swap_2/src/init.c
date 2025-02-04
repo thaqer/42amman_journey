@@ -24,7 +24,7 @@ t_stack	*init_stack(void)
 	return (a);
 }
 
-void	init_arguments(t_stack *a, int argc, char **argv)
+void	init_arguments(t_stack *a, t_stack *b, int argc, char **argv)
 {
 	int		x;
 	t_node	*new_node;
@@ -33,7 +33,7 @@ void	init_arguments(t_stack *a, int argc, char **argv)
 	if (argc == 2)
 	{
 		a->size = count_arguments(argv[1]);
-		parse_arguments(a, argv[1]);
+		parse_arguments(a, b, argv[1]);
 	}
 	else
 	{
@@ -41,10 +41,11 @@ void	init_arguments(t_stack *a, int argc, char **argv)
 		x = a->size;
 		while (x > 0)
 		{
+			is_valid(argv[x], a, b);
 			new_node = malloc(sizeof(t_node));
 			if (!new_node)
 				error_program(a, NULL);
-			new_node->value = ft_atoi(argv[x]);
+			new_node->value = ft_atol(argv[x], a, b);
 			new_node->next = a->top;
 			a->top = new_node;
 			x--;
@@ -52,7 +53,20 @@ void	init_arguments(t_stack *a, int argc, char **argv)
 	}
 }
 
-void	parse_arguments(t_stack *a, char *arg)
+void	is_valid(char *arg, t_stack *a, t_stack *b)
+{
+	int	x;
+
+	x = 0;
+	while (arg[x])
+	{
+		if (!ft_isdigit(arg[x]) && arg[x] != ' ' && arg[x] != '-')
+			error_program(a, b);
+		x++;
+	}
+}
+
+void	parse_arguments(t_stack *a, t_stack *b, char *arg)
 {
 	char	**numbers;
 	int		x;
@@ -62,10 +76,11 @@ void	parse_arguments(t_stack *a, char *arg)
 	x = a->size - 1;
 	while (x >= 0)
 	{
+		is_valid(numbers[x], a, b);
 		new_node = malloc(sizeof(t_node));
 		if (!new_node)
 			error_program(a, NULL);
-		new_node->value = ft_atoi(numbers[x]);
+		new_node->value = ft_atol(arg, a, b);
 		new_node->next = a->top;
 		a->top = new_node;
 		x--;

@@ -59,8 +59,6 @@ void	sort_3(t_stack *a)
 	}
 	else if (first < second && second > third && first > third)
 		rra(a);
-	else
-		ft_printf("no need to sort\n");
 }
 
 void	sort_4(t_stack *a, t_stack *b)

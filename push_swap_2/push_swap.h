@@ -22,6 +22,7 @@
 
 typedef struct s_node
 {
+	int				temp_v;
 	int				value;
 	int				temp;
 	int				index;
@@ -35,8 +36,9 @@ typedef struct s_stack
 }		t_stack;
 
 t_stack				*init_stack(void);
-void				parse_arguments(t_stack *a, char *arg);
-void				init_arguments(t_stack *a, int argc, char **argv);
+void				parse_arguments(t_stack *a, t_stack *b, char *arg);
+void				init_arguments(t_stack *a, t_stack *b, int argc, char **argv);
+void				is_valid(char *arg, t_stack *a, t_stack *b);
 void				check_arguments(t_stack *a);
 void				print_stack(t_stack *a);
 void				push_stack(t_stack *stack, int value);
@@ -62,8 +64,8 @@ int					find_max_bits(t_node *a);
 int					is_sorted(t_stack *a);
 int					count_arguments(char *arg);
 int					pull_stack(t_stack *stack);
-int					find_max(t_stack *a);
 int					find_min(t_stack *a);
 int					stack_size(t_stack *a);
+long					ft_atol(const char *nptr, t_stack *a, t_stack *b);
 
 #endif
