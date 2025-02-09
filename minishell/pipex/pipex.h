@@ -6,14 +6,14 @@
 /*   By: tbaniatt <tbaniatt@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 10:43:02 by tbaniatt          #+#    #+#             */
-/*   Updated: 2025/02/08 03:58:14 by tbaniatt         ###   ########.fr       */
+/*   Updated: 2025/02/09 20:40:36 by tbaniatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "ft_libft/libft.h"
+# include "../libft/libft.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -24,15 +24,14 @@
 
 typedef struct s_cmd
 {
-	pid_t	pid1;
-	pid_t	pid2;
-	char	*cmd;
+	pid_t	*pid;
+	char	**cmds;
 	char	*paths;
 	char	**cmd_path;
-	char	**args;
-	int		fd1;
-	int		fd2;
-	int		tube[2];
+	char	***args;
+	int		*fd;
+	int		**tubes;
+	int		cmd_count;
 }			t_cmd;
 
 void		error_message(char *message, t_cmd *cmd);
@@ -47,5 +46,8 @@ void		child2(t_cmd *cmd, char **argv, char **env);
 void		parent_free(t_cmd *pipex);
 void		close_command(t_cmd *cmd);
 void		error_process(char *massage, t_cmd *cmd);
+void		create_children(t_cmd *cmd, char **env);
+void		child_process(t_cmd *cmd, int i, char **env);
+void		close_pipes(t_cmd *cmd);
 
 #endif
