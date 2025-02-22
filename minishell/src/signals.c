@@ -12,20 +12,19 @@
 
 #include "../minishell.h"
 
-void handle_signal(int sig)
+void	handle_signal(int sig)
 {
-    if (sig == SIGINT)
-    {
-        ft_putstr_fd("\n", 1);
-        rl_on_new_line();
-        rl_replace_line("", 0);
-        rl_redisplay();
-    }
+	if (sig == SIGINT)
+	{
+		ft_putstr_fd("\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
-void setup_signals(void)
+void	setup_signals(void)
 {
-    signal(SIGINT, handle_signal);
-    signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, handle_signal);
+	signal(SIGQUIT, SIG_IGN);
 }
-
